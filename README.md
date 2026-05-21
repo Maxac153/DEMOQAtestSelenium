@@ -9,13 +9,6 @@
 
 Для того чтобы запустить тесты надо установить браузер chromium.
 
-## Технологии
-
-- Python 3.11.2
-- PyTest
-- PyTest html
-- Selenium
-
 # Состав проекта
 
 - Папка (tests) с Python тестами
@@ -25,10 +18,17 @@
 
 Пример запуска Selenium тестов:
 
-<img src="img/tests_selenium.png" width="700" height="300">
+![tests_selenium.png](img/tests_selenium.png)
 
 ## Отчет по Selenium тестам
 
 Пример отчета по Selenium тестам
 
-<img src="img/report_selenium.png" width="700" height="400">
+![report_selenium.png](img/report_selenium.png)
+
+Установка веб драйвера:
+
+```bash
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+apt install -y ./google-chrome-stable_current_amd64.deb
+```

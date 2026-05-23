@@ -18,7 +18,7 @@ class TestsDynamicProperties:
             dynamic_properties_page = DynamicPropertiesPage(driver, f"{os.environ.get("DEMOQA_HOST")}/dynamic-properties")
             dynamic_properties_page.open()
 
-        with allure.step("Ожидание изменение состояние кнопки"):
+        with allure.step("Ожидание изменение состояний кнопок"):
             button_enable, button_color_change, button_visible = dynamic_properties_page.button_click()
 
         with allure.step("Проверка изменения состояния кнопок"):

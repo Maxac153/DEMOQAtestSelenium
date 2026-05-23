@@ -1,13 +1,15 @@
 from typing import List
 
 from selenium.webdriver import ActionChains
+from selenium.webdriver.chrome.webdriver import WebDriver
+
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as Ec
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 
 
 class BasePage:
-    def __init__(self, driver, url):
+    def __init__(self, driver: WebDriver, url: str):
         self.driver = driver
         self.url = url
 

@@ -9,7 +9,7 @@ from src.ui.demoq.selenium.pages.button_page import ButtonPage
 
 
 @allure.feature("Button форма")
-class TestsButton:
+class TestsButtons:
     @allure.story("Проверка выбора button")
     @allure.title("Тест Button с параметризацией")
     @allure.step("Проверка Button, кликаем по button ({test_case_name})")

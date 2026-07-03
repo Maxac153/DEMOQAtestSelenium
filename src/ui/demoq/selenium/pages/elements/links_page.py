@@ -2,7 +2,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 from src.ui.demoq.selenium.locators.links_locators import LinksLocators
-from src.ui.demoq.selenium.modules.Links import Links
+from src.ui.demoq.selenium.modules.links import Links
 from src.ui.demoq.selenium.pages.base_page import BasePage
 
 

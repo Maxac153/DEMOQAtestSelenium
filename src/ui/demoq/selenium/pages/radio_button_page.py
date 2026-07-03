@@ -1,5 +1,5 @@
 from src.ui.demoq.selenium.locators.radio_button_locators import RadioButtonLocators
-from src.ui.demoq.selenium.modules.RadioButton import RadioButton
+from src.ui.demoq.selenium.modules.radio_button import RadioButton
 from src.ui.demoq.selenium.pages.base_page import BasePage
 
 

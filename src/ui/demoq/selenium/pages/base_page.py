@@ -1,7 +1,8 @@
 from typing import List
 
+import allure
 from selenium.webdriver import ActionChains
-from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as Ec
@@ -13,6 +14,7 @@ class BasePage:
         self.driver = driver
         self.url = url
 
+    @allure.step("Открытие страницы")
     def open(self):
         """Открытие страницы"""
 

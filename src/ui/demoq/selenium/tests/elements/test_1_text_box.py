@@ -2,18 +2,23 @@ import os
 
 import allure
 import pytest
-from faker import Faker
-from webdriver_manager.core.driver import Driver
+from selenium.webdriver.remote.webdriver import WebDriver
 
-from src.ui.demoq.selenium.modules.TextBox import TextBox
-from src.ui.demoq.selenium.pages.text_box import TextBoxPage
+from conftest import FAKE
+from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
+from src.ui.demoq.selenium.modules.elements.text_box import TextBox
+from src.ui.demoq.selenium.pages.elements.text_box import TextBoxPage
+
+BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.TEXT_BOX.value}"
 
 
+@allure.feature("Text Box форма")
 class TestsTextBox:
-    FAKE = Faker('ru_RU')
     EMAIL = FAKE.email()
 
-    @allure.feature("Text Box форма")
+    @pytest.mark.ui
+    @pytest.mark.smoke
+    @pytest.mark.positive
     @allure.story("Проверка отправки формы")
     @allure.title("Тест TextBox с параметризацией")
     @pytest.mark.parametrize(
@@ -39,7 +44,7 @@ class TestsTextBox:
                     )
             ),
             (
-                    "3. Некорректный email, пропуск @",
+                    "3. Некорректный email, пропуск собаки",
                     TextBox(
                         full_name=FAKE.name(),
                         email="user1example.com",
@@ -48,7 +53,7 @@ class TestsTextBox:
                     )
             ),
             (
-                    "4. Некорректный email, пропуск .",
+                    "4. Некорректный email, пропуск точки",
                     TextBox(
                         full_name=FAKE.name(),
                         email="user2@examplecom",
@@ -87,16 +92,13 @@ class TestsTextBox:
         ],
     )
     @allure.step("Открытие страницы и отправка формы ({test_case_name})")
-    def test_text_box(self, driver: Driver, test_case_name: str, data: TextBox):
-        """Проверка формы ввода с разными данными и ожидаемым результатом"""
+    def test_text_box(self, driver: WebDriver, test_case_name: str, data: TextBox):
+        """Проверка формы ввода с разными данными"""
 
-        with allure.step("Открытие страницы"):
-            text_box_page = TextBoxPage(driver, f"{os.environ.get("DEMOQA_HOST")}/text-box")
-            text_box_page.open()
-
-        with allure.step("Отправка формы"):
-            text_box_page.submit_form(data)
-            result = text_box_page.get_result_submit()
+        text_box_page = TextBoxPage(driver, BASE_URL)
+        text_box_page.open()
+        text_box_page.submit_form(data)
+        result = text_box_page.get_result_submit()
 
         expected_result = TextBox(
             full_name=f"Name:{data.full_name}",
@@ -105,5 +107,5 @@ class TestsTextBox:
             permanent_address=f"Permananet Address :{data.permanent_address}",
         )
 
-        with allure.step("Проверка отправленных данных"):
-            assert result.model_dump() == expected_result.model_dump()
+        with allure.step("Проверка соответствия отправленных и отображаемых данных"):
+            assert result.model_dump() == expected_result.model_dump(), "Данные на форме не совпадают с ожидаемыми"

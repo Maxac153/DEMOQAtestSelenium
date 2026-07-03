@@ -1,5 +1,7 @@
+import allure
+
 from src.ui.demoq.selenium.locators.text_box_page_locators import TextBoxPageLocators
-from src.ui.demoq.selenium.modules.TextBox import TextBox
+from src.ui.demoq.selenium.modules.elements.text_box import TextBox
 from src.ui.demoq.selenium.pages.base_page import BasePage
 
 
@@ -13,11 +15,13 @@ class TextBoxPage(BasePage):
         self.element_is_visible(TextBoxPageLocators.PERMANENT_ADDRESS).send_keys(data.permanent_address)
         self.element_is_visible(TextBoxPageLocators.SUBMIT).click()
 
+    @allure.step("Отправка формы")
     def submit_form(self, data: TextBox) -> None:
         """Отправка формы"""
 
         self.__filling_fields(data)
 
+    @allure.step("Получение результата")
     def get_result_submit(self) -> TextBox:
         """Проверка на отправку"""
 

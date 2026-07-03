@@ -1,5 +1,6 @@
 import random
 
+import allure
 from selenium.common import TimeoutException
 
 from src.ui.demoq.selenium.locators.check_box_page_locators import CheckBoxLocators
@@ -24,6 +25,7 @@ class CheckBoxPage(BasePage):
             for el in close_switches:
                 el.click()
 
+    @allure.step("Выбор случайного Check Box")
     def select_path(self) -> tuple[list[str], list[str]]:
         """Проверка пути"""
 
@@ -35,6 +37,7 @@ class CheckBoxPage(BasePage):
         result = [i.lower() for i in self.element_is_visible(CheckBoxLocators.RESULT).text.split("\n")]
         return select_result, result
 
+    @allure.step("Выделение случайного элемента Check Box")
     def select_item(self) -> tuple[str, str]:
         """Проверка выделения элемента"""
 

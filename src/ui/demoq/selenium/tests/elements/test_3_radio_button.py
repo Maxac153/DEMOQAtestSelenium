@@ -4,7 +4,7 @@ import allure
 import pytest
 from webdriver_manager.core.driver import Driver
 
-from src.ui.demoq.selenium.modules.RadioButton import RadioButton
+from src.ui.demoq.selenium.modules.radio_button import RadioButton
 from src.ui.demoq.selenium.pages.radio_button_page import RadioButtonPage
 
 

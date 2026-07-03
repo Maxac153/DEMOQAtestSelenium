@@ -2,9 +2,9 @@ import os
 
 import allure
 import pytest
-from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.remote.webdriver import WebDriver
 
-from src.ui.demoq.selenium.modules.Links import Links
+from src.ui.demoq.selenium.modules.links import Links
 from src.ui.demoq.selenium.pages.links_page import LinksPage
 
 
@@ -29,8 +29,7 @@ class TestsButton:
         with allure.step("Нажатие на Links ({select_links})"):
             result = links_page.open_new_tab(select_links)
 
-        with allure.step("Проверка нажатия на links"):
-            assert expected_result == result
+        assert expected_result == result, "Проверка нажатия на links"
 
     @allure.story("Проверка выбора links")
     @allure.title("Проверка Links, кликаем по links ({test_case_name})")

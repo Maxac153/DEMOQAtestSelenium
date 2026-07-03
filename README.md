@@ -32,3 +32,9 @@
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt install -y ./google-chrome-stable_current_amd64.deb
 ```
+
+##  TODO
+
+1. Параллельный запуск тестов
+2. Сбор Allure отчёта
+3. Проверить разные браузеры

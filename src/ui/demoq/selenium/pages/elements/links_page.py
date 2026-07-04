@@ -1,12 +1,14 @@
+import allure
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from src.ui.demoq.selenium.locators.links_locators import LinksLocators
-from src.ui.demoq.selenium.modules.links import Links
+from src.ui.demoq.selenium.locators.elements.links_locators import LinksLocators
+from src.ui.demoq.selenium.modules.elements.links import Links
 from src.ui.demoq.selenium.pages.base_page import BasePage
 
 
 class LinksPage(BasePage):
+    @allure.step("Открытие новой вкладки")
     def open_new_tab(self, select_links: Links) -> str:
         """Открытие новой вкладки"""
 
@@ -24,6 +26,7 @@ class LinksPage(BasePage):
 
         return self.driver.title
 
+    @allure.step("Нажатие на Links")
     def click_links(self, select_links: Links) -> str:
         """Нажатие на ссылку"""
 

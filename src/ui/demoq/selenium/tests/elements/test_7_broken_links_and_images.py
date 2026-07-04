@@ -9,9 +9,14 @@ from src.ui.demoq.selenium.modules.elements.broken_images import BrokenImages
 from src.ui.demoq.selenium.modules.elements.broken_links import BrokenLinks
 from src.ui.demoq.selenium.pages.elements.broken_links_and_images_page import BrokenLinksAndImagesPage
 
+BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.BROKEN_LINKS.value}"
 
-@allure.feature("Broken Links")
+
+@allure.feature("Форма Broken Links")
 class TestsBrokenLinksAndImages:
+    @pytest.mark.ui
+    @pytest.mark.smoke
+    @pytest.mark.positive
     @allure.story("Проверка Images")
     @allure.title("Проверка Images ({test_case_name})")
     @pytest.mark.parametrize(
@@ -22,13 +27,18 @@ class TestsBrokenLinksAndImages:
         ]
     )
     def test_images(self, driver: WebDriver, test_case_name: str, image: BrokenImages, broken_images: bool):
-        """Проверка Links"""
+        """Проверка Images"""
 
-        broken_links_page = BrokenLinksAndImagesPage(driver,f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.BROKEN_LINKS.value}")
+        broken_links_page = BrokenLinksAndImagesPage(driver, BASE_URL)
         broken_links_page.open()
         result = broken_links_page.select_image(image)
-        assert broken_images == result, "Проверка image (True, False)"
 
+        with allure.step("Проверка image (True, False)"):
+            assert broken_images == result, f"Ожидался {broken_images}, но получен {result}"
+
+    @pytest.mark.ui
+    @pytest.mark.smoke
+    @pytest.mark.negative
     @allure.story("Открытие новой вкладки")
     @allure.title("Проверка title новой вкладки для ({test_case_name})")
     @pytest.mark.parametrize(
@@ -41,7 +51,9 @@ class TestsBrokenLinksAndImages:
     def test_links(self, driver: WebDriver, test_case_name: str, select_links: BrokenLinks, expected_result: str):
         """Проверка Links"""
 
-        broken_links_page = BrokenLinksAndImagesPage(driver,f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.BROKEN_LINKS.value}")
+        broken_links_page = BrokenLinksAndImagesPage(driver, BASE_URL)
         broken_links_page.open()
         result = broken_links_page.open_new_tab(select_links)
-        assert expected_result == result, "Проверка нажатия на links"
+
+        with allure.step("Проверка нажатия на links"):
+            assert expected_result == result, f"Ожидался {expected_result}, но получен {result}"

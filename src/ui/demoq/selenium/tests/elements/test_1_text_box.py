@@ -12,7 +12,7 @@ from src.ui.demoq.selenium.pages.elements.text_box import TextBoxPage
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.TEXT_BOX.value}"
 
 
-@allure.feature("Text Box форма")
+@allure.feature("Форма Text Box")
 class TestsTextBox:
     EMAIL = FAKE.email()
 
@@ -91,7 +91,6 @@ class TestsTextBox:
             )
         ],
     )
-    @allure.step("Открытие страницы и отправка формы ({test_case_name})")
     def test_text_box(self, driver: WebDriver, test_case_name: str, data: TextBox):
         """Проверка формы ввода с разными данными"""
 

@@ -2,7 +2,7 @@ import allure
 from selenium.webdriver import ActionChains
 
 from src.ui.demoq.selenium.locators.button_locators import ButtonLocators
-from src.ui.demoq.selenium.modules.button import Button
+from src.ui.demoq.selenium.modules.elements.button import Button
 from src.ui.demoq.selenium.pages.base_page import BasePage
 
 

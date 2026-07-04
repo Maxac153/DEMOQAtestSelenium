@@ -9,6 +9,7 @@ class DynamicPropertiesPage(BasePage):
     def button_click(self) -> tuple[bool, str | None, str]:
         button_visible = self.element_is_visible(DynamicPropertiesLocators.BUTTON_VISIBLE, 10).text
         button_enable = self.element_is_visible(DynamicPropertiesLocators.BUTTON_ENABLE_5S).is_enabled()
-        button_color_change = self.element_is_visible(DynamicPropertiesLocators.BUTTON_COLOR_CHANGE).get_attribute("class")
+        button_color_change = self.element_is_visible(DynamicPropertiesLocators.BUTTON_COLOR_CHANGE).get_attribute(
+            "class")
 
         return button_enable, button_color_change, button_visible

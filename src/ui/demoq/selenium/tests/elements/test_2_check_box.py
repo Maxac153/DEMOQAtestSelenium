@@ -22,13 +22,10 @@ class TestsCheckBox:
     @pytest.mark.parametrize("run_id", RUN_IDS, ids=RUN_IDS)
     def test_check_box_random_paths(self, driver: WebDriver, run_id: str):
         """Проверка выбора чекбоксов по случайным путям."""
+
         check_box_page = CheckBoxPage(driver, BASE_URL)
-
-        with allure.step("Открыть страницу чекбоксов"):
-            check_box_page.open()
-
-        with allure.step("Выбрать случайные пути чекбоксов"):
-            select_items, result = check_box_page.select_path()
+        check_box_page.open()
+        select_items, result = check_box_page.select_path()
 
         with allure.step("Проверить отображение элементов в результате"):
             for select_item in select_items:
@@ -40,15 +37,12 @@ class TestsCheckBox:
     @allure.story("Выделение отдельного элемента")
     @allure.title("Проверка выделения случайного чекбокса ({run_id})")
     @pytest.mark.parametrize("run_id", RUN_IDS, ids=RUN_IDS)
-    def test_check_box_single_item(self, driver: WebDriver, run_id: str):
+    def test_check_box_select_item(self, driver: WebDriver, run_id: str):
         """Проверка выделения одного случайного чекбокса."""
+
         check_box_page = CheckBoxPage(driver, BASE_URL)
-
-        with allure.step("Открыть страницу чекбоксов"):
-            check_box_page.open()
-
-        with allure.step("Выбрать и выделить случайный чекбокс"):
-            result, check_box_select = check_box_page.select_item()
+        check_box_page.open()
+        result, check_box_select = check_box_page.select_item()
 
         with allure.step("Проверить равенство выделенного элемента и результата"):
             assert result == check_box_select, f"Ожидался '{check_box_select}', но получен '{result}'"

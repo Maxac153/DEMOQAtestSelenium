@@ -1,9 +1,12 @@
+import allure
+
 from src.ui.demoq.selenium.locators.radio_button_locators import RadioButtonLocators
-from src.ui.demoq.selenium.modules.radio_button import RadioButton
+from src.ui.demoq.selenium.modules.elements.radio_button import RadioButton
 from src.ui.demoq.selenium.pages.base_page import BasePage
 
 
 class RadioButtonPage(BasePage):
+    @allure.step("Выбор Radio Button")
     def radio_button_click(self, radio_button_enum: RadioButton) -> str:
         """Нажатие на определённый radio button"""
 

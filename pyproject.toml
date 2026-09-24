@@ -3,6 +3,7 @@ name = "demoqatestselenium"
 version = "0.1.0"
 description = ""
 authors = [{ name = "turgor", email = "maxac153@gmail.com" }]
+package-mode = false
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

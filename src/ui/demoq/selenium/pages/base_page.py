@@ -3,7 +3,6 @@ from typing import List
 import allure
 from selenium.webdriver import ActionChains
 from selenium.webdriver.remote.webdriver import WebDriver
-
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as Ec
 from selenium.webdriver.support.ui import WebDriverWait as Wait
@@ -29,6 +28,25 @@ class BasePage:
         """Найти все элементы на странице"""
 
         return Wait(self.driver, timeout).until(Ec.visibility_of_all_elements_located(locator))
+
+    def element_is_invisible(self, locator, timeout: int = 5) -> bool:
+        """Дождаться исчезновения элемента со страницы."""
+
+        return Wait(self.driver, timeout).until(Ec.invisibility_of_element_located(locator))
+
+    @allure.step('Go to specified element')
+    def go_to_element(self, element):
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
+
+    @allure.step('Найдите присутствующий элемент')
+    def element_is_present(self, locator, timeout=5) -> WebElement:
+        """Найдите присутствующий элемент"""
+
+        return Wait(self.driver, timeout).until(Ec.presence_of_element_located(locator))
+
+    @allure.step('Find present elements')
+    def elements_are_present(self, locator, timeout=5):
+        return Wait(self.driver, timeout).until(Ec.presence_of_all_elements_located(locator))
 
     def class_attribute(self, locator, timeout: int = 5) -> WebElement:
         """Параметры атрибута"""

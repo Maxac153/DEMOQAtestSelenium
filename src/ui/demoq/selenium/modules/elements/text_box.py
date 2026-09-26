@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class TextBox(BaseModel):
-    full_name: str = None
-    email: str = None
-    current_address: str = None
-    permanent_address: str = None
+    full_name: str = ''
+    email: str = ''
+    current_address: str = ''
+    permanent_address: str = ''

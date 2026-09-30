@@ -1,10 +1,10 @@
 import allure
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 
 from src.ui.demoq.selenium.locators.elements.links_locators import LinksLocators
 from src.ui.demoq.selenium.modules.elements.links import Links
-from src.ui.demoq.selenium.pages.base_page import BasePage
+from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class LinksPage(BasePage):
@@ -20,7 +20,7 @@ class LinksPage(BasePage):
             case Links.DYNAMIC_LINK_LINK:
                 self.element_is_visible(LinksLocators.DYNAMIC_LINK_LINK).click()
 
-        WebDriverWait(self.driver, 10).until(EC.new_window_is_opened(old_handles))
+        WebDriverWait(self.driver, 10).until(ec.new_window_is_opened(old_handles))
         new_handle = [h for h in self.driver.window_handles if h not in old_handles][0]
         self.driver.switch_to.window(new_handle)
 

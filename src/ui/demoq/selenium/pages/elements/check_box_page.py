@@ -1,0 +1,49 @@
+import random
+
+import allure
+from selenium.common import TimeoutException
+
+from src.ui.demoq.selenium.locators.elements.check_box_locators import CheckBoxLocators
+from src.ui.demoq.selenium.pages.__common.base_page import BasePage
+
+
+class CheckBoxPage(BasePage):
+    def __switch_open(self) -> None:
+        """Открываем все Check Box"""
+
+        while True:
+            try:
+                close_switches = self.elements_are_visible(CheckBoxLocators.SWITCH_CLOSE)
+            except TimeoutException:
+                close_switches = []
+
+            close_switches = [el for el in close_switches if el.is_displayed()]
+
+            if not close_switches:
+                break
+
+            for el in close_switches:
+                el.click()
+
+    @allure.step("Выбор случайного Check Box")
+    def select_path(self) -> tuple[list[str], list[str]]:
+        """Проверка пути"""
+
+        self.__switch_open()
+        check_boxes = self.elements_are_visible(CheckBoxLocators.CHecK_BOX)
+        random.choice(check_boxes).click()
+        check_boxes_active = self.elements_are_visible(CheckBoxLocators.CHecK_BOX_ACTIVE)
+        select_result = [i.text.split(".")[0].replace(" ", "").lower() for i in check_boxes_active]
+        result = [i.lower() for i in self.element_is_visible(CheckBoxLocators.RESULT).text.split("\n")]
+        return select_result, result
+
+    @allure.step("Выделение случайного элемента Check Box")
+    def select_item(self) -> tuple[str, str]:
+        """Проверка выделения элемента"""
+
+        self.__switch_open()
+        check_boxes = self.elements_are_visible(CheckBoxLocators.SELecT_ITEMS)
+        check_box = random.choice(check_boxes)
+        check_box.click()
+        result = self.element_is_visible(CheckBoxLocators.SELecT_ITEM_ACTIVE).text
+        return result, check_box.text

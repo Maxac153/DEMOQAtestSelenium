@@ -12,12 +12,14 @@ from src.ui.demoq.selenium.pages.elements.web_table_page import WebTablePage
 
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.WEB_TABLES.value}"
 
-faker_ru = Faker('ru_RU')
-fake_en = Faker('En')
+faker_ru = Faker("ru_RU")
+fake_en = Faker("En")
 Faker.seed()
 
 
-@allure.feature("Форма Web Tables")
+@allure.parent_suite("UI-test")
+@allure.suite("DemoQA")
+@allure.feature("Страница Web Tables")
 class TestsButton:
     @pytest.mark.ui
     @pytest.mark.smoke
@@ -48,8 +50,6 @@ class TestsButton:
             test_case_name: str,
             person: Person
     ):
-        """Проверка добавления нового Person"""
-
         web_table_page = WebTablePage(driver, BASE_URL)
         web_table_page.open()
         new_person = web_table_page.add_new_person(person)
@@ -66,7 +66,7 @@ class TestsButton:
     @pytest.mark.parametrize(
         "test_case_name,person",
         [
-            ("Проверка открытия новой вкладки (SIMPLE_LINK_LINK)1",
+            ("Проверка открытия новой вкладки (SIMPLE_LINK_LINK)",
              Person(
                  full_name=faker_ru.first_name() + " " + faker_ru.last_name() + " " + faker_ru.middle_name(),
                  firstname=faker_ru.first_name(),
@@ -87,8 +87,6 @@ class TestsButton:
             test_case_name: str,
             person: Person
     ):
-        """Проверка добавления нового Person"""
-
         web_table_page = WebTablePage(driver, BASE_URL)
         web_table_page.open()
         key_word = web_table_page.add_new_person(person)[random.randint(0, 5)]
@@ -101,8 +99,8 @@ class TestsButton:
     @pytest.mark.ui
     @pytest.mark.smoke
     @pytest.mark.positive
-    @allure.story("Добавление пользователя1")
-    @allure.title('Проверка для обновления информации о человеке в таблице')
+    @allure.story("Добавление пользователя")
+    @allure.title("Проверка для обновления информации о человеке в таблице")
     @pytest.mark.parametrize(
         "test_case_name,person",
         [
@@ -127,8 +125,6 @@ class TestsButton:
             test_case_name: str,
             person: Person
     ):
-        """Изменение карточки пользователя"""
-
         web_table_page = WebTablePage(driver, BASE_URL)
         web_table_page.open()
         lastname = web_table_page.add_new_person(person)[1]
@@ -162,15 +158,13 @@ class TestsButton:
              )),
         ]
     )
-    @allure.title('Проверка возможности удаления человека из таблицы')
+    @allure.title("Проверка возможности удаления человека из таблицы")
     def test_web_table_delete_person(
             self,
             driver: WebDriver,
             test_case_name: str,
             person: Person
     ):
-        """Проверка возможности удаления человека из таблицы"""
-
         web_table_page = WebTablePage(driver, BASE_URL)
         web_table_page.open()
         email = web_table_page.add_new_person(person)[3]
@@ -185,7 +179,7 @@ class TestsButton:
     @pytest.mark.smoke
     @pytest.mark.positive
     @allure.story("Проверьте изменение количества строк в таблице")
-    @allure.title('Проверьте изменение количества строк в таблице ({test_case_name})')
+    @allure.title("Проверьте изменение количества строк в таблице ({test_case_name})")
     @pytest.mark.parametrize(
         "test_case_name,person",
         [
@@ -210,12 +204,10 @@ class TestsButton:
             test_case_name: str,
             person: Person
     ):
-        """Проверьте изменение количества строк в таблице"""
-
         web_table_page = WebTablePage(driver, BASE_URL)
         web_table_page.open()
         count = web_table_page.select_up_to_some_rows()
 
         with allure.step("Строки не найдены"):
             assert count == [10, 20, 30, 40, 50], \
-                'Количество строк в таблице не изменилось или изменилось некорректно'
+                "Количество строк в таблице не изменилось или изменилось некорректно"

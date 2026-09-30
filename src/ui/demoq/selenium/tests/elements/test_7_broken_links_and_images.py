@@ -12,7 +12,9 @@ from src.ui.demoq.selenium.pages.elements.broken_links_and_images_page import Br
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.BROKEN_LINKS.value}"
 
 
-@allure.feature("Форма Broken Links")
+@allure.parent_suite("UI-test")
+@allure.suite("DemoQA")
+@allure.feature("Страница Broken Links And Images")
 class TestsBrokenLinksAndImages:
     @pytest.mark.ui
     @pytest.mark.smoke
@@ -27,8 +29,6 @@ class TestsBrokenLinksAndImages:
         ]
     )
     def test_images(self, driver: WebDriver, test_case_name: str, image: BrokenImages, broken_images: bool):
-        """Проверка Images"""
-
         broken_links_page = BrokenLinksAndImagesPage(driver, BASE_URL)
         broken_links_page.open()
         result = broken_links_page.select_image(image)
@@ -49,8 +49,6 @@ class TestsBrokenLinksAndImages:
         ]
     )
     def test_links(self, driver: WebDriver, test_case_name: str, select_links: BrokenLinks, expected_result: str):
-        """Проверка Links"""
-
         broken_links_page = BrokenLinksAndImagesPage(driver, BASE_URL)
         broken_links_page.open()
         result = broken_links_page.open_new_tab(select_links)

@@ -11,7 +11,9 @@ from src.ui.demoq.selenium.pages.elements.links_page import LinksPage
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.LINKS.value}"
 
 
-@allure.feature("Форма Links")
+@allure.parent_suite("UI-test")
+@allure.suite("DemoQA")
+@allure.feature("Страница Links")
 class TestsButton:
     @pytest.mark.ui
     @pytest.mark.smoke
@@ -21,15 +23,14 @@ class TestsButton:
     @pytest.mark.parametrize(
         "test_case_name,select_links,expected_result",
         [
-            ("Проверка открытия новой вкладки (SIMPLE_LINK_LINK)", Links.SIMPLE_LINK_LINK, Links.SIMPLE_LINK_LINK.value),
+            (
+            "Проверка открытия новой вкладки (SIMPLE_LINK_LINK)", Links.SIMPLE_LINK_LINK, Links.SIMPLE_LINK_LINK.value),
             ("Проверка открытия новой вкладки (DYNAMIC_LINK_LINK)", Links.DYNAMIC_LINK_LINK,
              Links.DYNAMIC_LINK_LINK.value)
         ]
     )
     def test_open_new_tab_title(self, driver: WebDriver, test_case_name: str, select_links: Links,
                                 expected_result: str):
-        """Проверка Links"""
-
         links_page = LinksPage(driver, BASE_URL)
         links_page.open()
         result = links_page.open_new_tab(select_links)
@@ -55,8 +56,6 @@ class TestsButton:
         ]
     )
     def test_check_links(self, driver: WebDriver, test_case_name: str, select_links: Links, expected_result: str):
-        """Проверка Links"""
-
         links_page = LinksPage(driver, BASE_URL)
         links_page.open()
         result = links_page.click_links(select_links)

@@ -4,7 +4,7 @@ import requests
 from src.ui.demoq.selenium.locators.elements.broken_links_and_images_locators import BrokenLinksAndImagesLinksLocators
 from src.ui.demoq.selenium.modules.elements.broken_images import BrokenImages
 from src.ui.demoq.selenium.modules.elements.broken_links import BrokenLinks
-from src.ui.demoq.selenium.pages.base_page import BasePage
+from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class BrokenLinksAndImagesPage(BasePage):

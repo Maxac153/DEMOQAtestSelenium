@@ -6,12 +6,14 @@ from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.modules.elements.button import Button
-from src.ui.demoq.selenium.pages.button_page import ButtonPage
+from src.ui.demoq.selenium.pages.elements.button_page import ButtonPage
 
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.BUTTONS.value}"
 
 
-@allure.feature("Форма Button")
+@allure.parent_suite("UI-test")
+@allure.suite("DemoQA")
+@allure.feature("Страница Button")
 class TestsButtons:
     @pytest.mark.ui
     @pytest.mark.smoke
@@ -39,8 +41,6 @@ class TestsButtons:
         ]
     )
     def test_check_box(self, driver: WebDriver, test_case_name: str, select_button: Button, expected_result: str):
-        """Проверка Radio Button, выбор случайного значения"""
-
         button_page = ButtonPage(driver, BASE_URL)
         button_page.open()
         result = button_page.button_click(select_button)

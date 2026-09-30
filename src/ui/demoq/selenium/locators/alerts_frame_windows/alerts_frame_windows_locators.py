@@ -1,0 +1,10 @@
+from selenium.webdriver.common.by import By
+
+
+class AlertsLocators:
+    SEE_ALERT_BUTTON = (By.CSS_SELECTOR, 'button[id="alertButton"]')
+    APPEAR_ALERT_AFTER_5_Sec_BUTTON = (By.CSS_SELECTOR, 'button[id="timerAlertButton"]')
+    CONFIRM_BOX_ALERT_BUTTON = (By.CSS_SELECTOR, 'button[id="confirmButton"]')
+    CONFIRM_RESULT = (By.CSS_SELECTOR, 'span[id="confirmResult"]')
+    PROMPT_BOX_ALERT_BUTTON = (By.CSS_SELECTOR, 'button[id="promtButton"]')
+    PROMPT_RESULT = (By.CSS_SELECTOR, 'span[id="promptResult"]')

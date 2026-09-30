@@ -1,11 +1,9 @@
-from time import sleep
-
 import allure
 from selenium.webdriver.common.by import By
 
 from src.ui.demoq.selenium.locators.elements.web_table_locators import WebTableLocators
 from src.ui.demoq.selenium.modules.elements.person import Person
-from src.ui.demoq.selenium.pages.base_page import BasePage
+from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class WebTablePage(BasePage):

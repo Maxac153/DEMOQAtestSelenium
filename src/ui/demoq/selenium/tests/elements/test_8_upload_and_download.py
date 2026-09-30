@@ -10,7 +10,9 @@ from src.ui.demoq.selenium.pages.elements.upload_and_download_page import Upload
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.UPLOAD_DOWNLOAD.value}"
 
 
-@allure.feature("Форма Upload And Download")
+@allure.parent_suite("UI-test")
+@allure.suite("DemoQA")
+@allure.feature("Страница Upload And Download")
 class TestsUploadAndDownload:
     @pytest.mark.ui
     @pytest.mark.smoke
@@ -20,12 +22,10 @@ class TestsUploadAndDownload:
     @pytest.mark.parametrize(
         "test_case_name,file_path",
         [
-            ("Проверка скачивания картинки", rf'input/img/file_test.jpeg')
+            ("Проверка скачивания картинки", rf"input/img/file_test.jpeg")
         ]
     )
     def test_download_file(self, driver: WebDriver, test_case_name: str, file_path: str):
-        """Проверка Download File"""
-
         upload_download_page = UploadAndDownloadPage(driver, BASE_URL)
         upload_download_page.open()
         result = upload_download_page.download_file(file_path)
@@ -41,12 +41,10 @@ class TestsUploadAndDownload:
     @pytest.mark.parametrize(
         "test_case_name,file_path",
         [
-            ("Проверка загрузки файла", rf'input/img/test_file.txt')
+            ("Проверка загрузки файла", rf"input/img/test_file.txt")
         ]
     )
     def test_upload_file(self, driver: WebDriver, test_case_name: str, file_path: str):
-        """Проверка Upload"""
-
         upload_download_page = UploadAndDownloadPage(driver, BASE_URL)
         upload_download_page.open()
         file_name, result = upload_download_page.upload_file(file_path)

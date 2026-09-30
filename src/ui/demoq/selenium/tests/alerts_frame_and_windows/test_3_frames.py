@@ -5,12 +5,14 @@ import pytest
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
-from src.ui.demoq.selenium.pages.browser_windows.frames_page import FramesPage
+from src.ui.demoq.selenium.pages.alerts_frame_windows.frames_page import FramesPage
 
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.FRAMES.value}"
 
 
-@allure.feature("Frames Page")
+@allure.parent_suite("UI-test")
+@allure.suite("DemoQA")
+@allure.feature("Страница Frames")
 class TestFramesPage:
     @pytest.mark.ui
     @pytest.mark.smoke

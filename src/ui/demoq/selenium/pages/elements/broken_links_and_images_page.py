@@ -18,8 +18,6 @@ class BrokenLinksAndImagesPage(BasePage):
 
     @allure.step("Нажатие на Links ({image})")
     def select_image(self, image: BrokenImages) -> bool:
-        """Проверка images"""
-
         img = ""
         match image:
             case BrokenImages.VALID_IMAGE:
@@ -31,8 +29,6 @@ class BrokenLinksAndImagesPage(BasePage):
 
     @allure.step("Нажатие на Links ({select_links})")
     def open_new_tab(self, select_links: BrokenLinks) -> str:
-        """Нажатие на ссылку"""
-
         match select_links:
             case BrokenLinks.VALID_LINK:
                 self.element_is_visible(BrokenLinksAndImagesLinksLocators.VALID_LINK).click()

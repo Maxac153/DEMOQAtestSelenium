@@ -1,8 +1,7 @@
-from dataclasses import dataclass
+from pydantic import BaseModel
 
 
-@dataclass
-class Date:
+class Date(BaseModel):
     day: str = None
     month: str = None
     year: str = None

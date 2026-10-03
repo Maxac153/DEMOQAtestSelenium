@@ -11,6 +11,7 @@ from src.ui.demoq.selenium.pages.elements.text_box_page import TextBoxPage
 
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.TEXT_BOX.value}"
 
+
 @allure.parent_suite("UI-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Text Box")

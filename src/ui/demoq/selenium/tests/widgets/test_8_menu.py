@@ -23,13 +23,14 @@ class TestMenuPage:
         menu_page.open()
         result = menu_page.check_menu()
 
-        assert result == [
-            "Main Item 1",
-            "Main Item 2",
-            "Sub Item",
-            "Sub Item",
-            "SUB SUB LIST »",
-            "Sub Sub Item 1",
-            "Sub Sub Item 2",
-            "Main Item 3",
-        ], "Пункты меню отсутствуют или выбраны некорректно"
+        with allure.step("Проверка изменения состояния кнопок"):
+            assert result == [
+                "Main Item 1",
+                "Main Item 2",
+                "Sub Item",
+                "Sub Item",
+                "SUB SUB LIST »",
+                "Sub Sub Item 1",
+                "Sub Sub Item 2",
+                "Main Item 3",
+            ], "Пункты меню отсутствуют или выбраны некорректно"

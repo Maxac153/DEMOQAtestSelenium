@@ -6,7 +6,7 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class RadioButtonPage(BasePage):
-    @allure.step('Выбор Radio Button')
+    @allure.step("Выбор Radio Button")
     def radio_button_click(self, radio_button_enum: RadioButton) -> str:
         if radio_button_enum == RadioButton.YES:
             self.element_is_visible(RadioButtonLocators.RADIO_BUTTON_YES).click()

@@ -10,8 +10,6 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 class LinksPage(BasePage):
     @allure.step("Открытие новой вкладки")
     def open_new_tab(self, select_links: Links) -> str:
-        """Открытие новой вкладки"""
-
         old_handles = self.driver.window_handles
 
         match select_links:
@@ -28,8 +26,6 @@ class LinksPage(BasePage):
 
     @allure.step("Нажатие на Links")
     def click_links(self, select_links: Links) -> str:
-        """Нажатие на ссылку"""
-
         match select_links:
             case Links.CREATED_LINK:
                 self.element_is_visible(LinksLocators.CREATED_LINK).click()

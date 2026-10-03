@@ -15,7 +15,7 @@ class ToolTipsPage(BasePage):
 
         return text
 
-    @allure.step('check tool tip')
+    @allure.step("check tool tip")
     def check_tool_tips(self):
         tool_tip_text_button = self.get_text_from_tool_tips(
             ToolTipsLocators().BUTTON, ToolTipsLocators().TOOL_TIP_BUTTON
@@ -28,7 +28,7 @@ class ToolTipsPage(BasePage):
             ToolTipsLocators().TOOL_TIP_CONTRARY
         )
         tool_tip_text_section = self.get_text_from_tool_tips(
-            ToolTipsLocators().SecTION_LINK,
+            ToolTipsLocators().SECTION_LINK,
             ToolTipsLocators().TOOL_TIP_SecTION
         )
 

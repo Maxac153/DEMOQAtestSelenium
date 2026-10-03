@@ -18,7 +18,7 @@ class TestFramesPage:
     @pytest.mark.smoke
     @pytest.mark.positive
     @pytest.mark.parametrize(
-        "frame_name, expected_result",
+        "frame_name,expected_result",
         [
             pytest.param(
                 "frame1",
@@ -33,13 +33,13 @@ class TestFramesPage:
         ],
     )
     @allure.story("Проверка iframe")
-    @allure.title("Проверка отображения данных в {frame_name}")
+    @allure.title("Проверка отображения данных в iframe")
     def test_frames(self, driver: WebDriver, frame_name: str, expected_result: list[str]):
         frames_page = FramesPage(driver, BASE_URL)
         frames_page.open()
         actual_result = frames_page.frame(frame_name)
 
-        with allure.step(f"Проверка содержимого {frame_name}"):
+        with allure.step(f"Проверка содержимого {frame_name}: текст и размеры"):
             assert actual_result == expected_result, (
                 f"Некорректные данные в {frame_name}. "
                 f"Ожидалось: {expected_result}, "

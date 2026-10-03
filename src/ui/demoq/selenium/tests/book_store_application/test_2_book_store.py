@@ -1,6 +1,7 @@
 from src.ui.demoq.selenium.pages.book_page import BookPage
 
 
+# TODO Переделать тесты
 class TestsSearchBook:
     def test_search_book_by_name(self, driver):
         """Проверка поиска (По названию книги)"""

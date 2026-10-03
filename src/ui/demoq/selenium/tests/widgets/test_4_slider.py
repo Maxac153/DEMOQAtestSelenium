@@ -24,4 +24,5 @@ class TestSliderPage:
         slider.open()
         before, after = slider.change_slider_value()
 
-        assert before == after, "the slider value has not been changed"
+        with allure.step("Проверка изменения состояния кнопок"):
+            assert before == after, "the slider value has not been changed"

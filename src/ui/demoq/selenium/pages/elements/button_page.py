@@ -9,8 +9,6 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 class ButtonPage(BasePage):
     @allure.step("Нажатие на Button")
     def button_click(self, button_enum: Button) -> str:
-        """Нажатие на определённый button"""
-
         result = ""
         if button_enum == Button.DOUBLE_CLICK_ME_BUTTON:
             element = self.element_is_visible(ButtonLocators.DOUBLE_CLICK_ME_BUTTON)

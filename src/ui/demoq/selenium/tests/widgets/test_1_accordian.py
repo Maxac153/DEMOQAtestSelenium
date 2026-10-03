@@ -26,6 +26,7 @@ class TestAccordianPage:
         second_title, second_has_content = accordian_page.check_accordian("second")
         third_title, third_has_content = accordian_page.check_accordian("third")
 
-        assert first_title == "What is Lorem Ipsum?" and first_has_content, "Неверный заголовок или отсутствует текст"
-        assert second_title == "Where does it come form?" and second_has_content, "Неверный заголовок или отсутствует текст"
-        assert third_title == "Why do we use it?" and third_has_content, "Неверный заголовок или отсутствует текст"
+        with allure.step("Проверка изменения состояния кнопок"):
+            assert first_title == "What is Lorem Ipsum?" and first_has_content, "Неверный заголовок или отсутствует текст"
+            assert second_title == "Where does it come form?" and second_has_content, "Неверный заголовок или отсутствует текст"
+            assert third_title == "Why do we use it?" and third_has_content, "Неверный заголовок или отсутствует текст"

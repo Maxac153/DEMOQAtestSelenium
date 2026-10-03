@@ -25,6 +25,7 @@ class TestResizablePage:
         max_box, min_box = resizable_page.change_size_resizable_box()
         max_resize, min_resize = resizable_page.change_size_resizable()
 
-        assert ("200px", "200px") == max_box, "maximum size not equal to '200px', '200px'"
-        assert ("150px", "150px") == min_box, "minimum size not equal to '150px', '150px'"
-        assert min_resize != max_resize, "resizable has not been changed"
+        with allure.step("Проверка изменения состояния кнопок"):
+            assert ("200px", "200px") == max_box, "maximum size not equal to '200px', '200px'"
+            assert ("150px", "150px") == min_box, "minimum size not equal to '150px', '150px'"
+            assert min_resize != max_resize, "resizable has not been changed"

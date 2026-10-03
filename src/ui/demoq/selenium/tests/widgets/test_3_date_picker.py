@@ -24,7 +24,8 @@ class TestAccordianPage:
         date_picker_page.open()
         value_date_before, value_date_after = date_picker_page.select_date()
 
-        assert value_date_before != value_date_after, "the date has not been changed"
+        with allure.step("Проверка изменения состояния кнопок"):
+            assert value_date_before != value_date_after, "the date has not been changed"
 
     @allure.title("Check change date and time")
     def test_change_date_and_time(self, driver):
@@ -32,4 +33,5 @@ class TestAccordianPage:
         date_picker_page.open()
         value_date_before, value_date_after = date_picker_page.select_date_and_time()
 
-        assert value_date_before != value_date_after, "the date and time have not been changed"
+        with allure.step("Проверка изменения состояния кнопок"):
+            assert value_date_before != value_date_after, "the date and time have not been changed"

@@ -1,6 +1,5 @@
-from dataclasses import dataclass
+from pydantic import BaseModel
 
 
-@dataclass
-class Color:
+class Color(BaseModel):
     color_name: list = None

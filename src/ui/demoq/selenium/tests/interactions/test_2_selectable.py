@@ -25,5 +25,6 @@ class TestSortablePage:
         item_list = selectable_page.select_list_item()
         item_grid = selectable_page.select_grid_item()
 
-        assert len(item_list) > 0, "no elements were selected"
-        assert len(item_grid) > 0, "no elements were selected"
+        with allure.step("Проверка изменения состояния кнопок"):
+            assert len(item_list) > 0, "no elements were selected"
+            assert len(item_grid) > 0, "no elements were selected"

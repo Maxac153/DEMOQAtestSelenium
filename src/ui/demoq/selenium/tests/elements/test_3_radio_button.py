@@ -27,10 +27,13 @@ class TestsRadioButton:
             ("Проверка нажатия на Check Box Impressive", RadioButton.IMPRESSIVE, RadioButton.IMPRESSIVE.value)
         ]
     )
-    def test_check_box(self, driver: WebDriver, test_case_name: str, select_check_box: RadioButton,
-                       expected_result: str):
-        """Проверка Radio Button, выбор случайного значения"""
-
+    def test_check_box(
+            self,
+            driver: WebDriver,
+            test_case_name: str,
+            select_check_box: RadioButton,
+            expected_result: str
+    ):
         check_box_page = RadioButtonPage(driver, BASE_URL)
         check_box_page.open()
         result = check_box_page.radio_button_click(select_check_box)

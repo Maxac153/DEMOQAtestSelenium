@@ -9,7 +9,7 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class AlertsPage(BasePage):
-    @allure.step('Получить текст из оповещения')
+    @allure.step("Получить текст из оповещения")
     def check_see_alert(self):
         self.element_is_visible(AlertsLocators.SEE_ALERT_BUTTON).click()
         alert = self.driver.switch_to.alert
@@ -18,9 +18,9 @@ class AlertsPage(BasePage):
 
         return result
 
-    @allure.step('Уведомление появляется через 5 секунд')
+    @allure.step("Уведомление появляется через 5 секунд")
     def check_alert_appear_5_sec(self):
-        self.element_is_visible(AlertsLocators.APPEAR_ALERT_AFTER_5_Sec_BUTTON).click()
+        self.element_is_visible(AlertsLocators.APPEAR_ALERT_AFTER_5_SEC_BUTTON).click()
         # TODO Убрать все WebDriverWait из Page в BasePage
         alert = WebDriverWait(self.driver, timeout=10, poll_frequency=0.2).until(ec.alert_is_present())
         alert_text = alert.text
@@ -28,7 +28,7 @@ class AlertsPage(BasePage):
 
         return alert_text
 
-    @allure.step('Проверить, подтвердить, оповестить')
+    @allure.step("Проверить, подтвердить, оповестить")
     def check_confirm_alert(self):
         self.element_is_visible(AlertsLocators.CONFIRM_BOX_ALERT_BUTTON).click()
         alert = self.driver.switch_to.alert
@@ -37,7 +37,7 @@ class AlertsPage(BasePage):
 
         return text_result
 
-    @allure.step('Проверить оповещение о запросе')
+    @allure.step("Проверить оповещение о запросе")
     def check_prompt_alert(self):
         text = f"autotest{random.randint(0, 999)}"
         self.element_is_visible(AlertsLocators.PROMPT_BOX_ALERT_BUTTON).click()

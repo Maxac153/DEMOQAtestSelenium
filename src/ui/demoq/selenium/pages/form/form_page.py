@@ -18,17 +18,17 @@ class FormPage(BasePage):
         self.element_is_visible(FormLocators().EMAIL).send_keys(person.email)
         self.element_is_visible(FormLocators().GENDER).click()
         self.element_is_visible(FormLocators().MOBILE).send_keys(person.mobile)
-        self.element_is_visible(FormLocators().SUBJecT).send_keys("Math")
-        self.element_is_visible(FormLocators().SUBJecT).send_keys(Keys.RETURN)
+        self.element_is_visible(FormLocators().SUBJECT).send_keys("Math")
+        self.element_is_visible(FormLocators().SUBJECT).send_keys(Keys.RETURN)
         self.element_is_visible(FormLocators().HOBBIES).click()
         self.element_is_present(FormLocators().FILE_INPUT).send_keys(path)
 
         os.remove(path)
 
         self.element_is_visible(FormLocators().CURRENT_ADDRESS).send_keys(person.current_address)
-        self.element_is_visible(FormLocators().SELecT_STATE).click()
+        self.element_is_visible(FormLocators().SELECT_STATE).click()
         self.element_is_visible(FormLocators().STATE_INPUT).send_keys(Keys.RETURN)
-        self.element_is_visible(FormLocators().SELecT_CITY).click()
+        self.element_is_visible(FormLocators().SELECT_STATE).click()
         self.element_is_visible(FormLocators().CITY_INPUT).send_keys(Keys.RETURN)
         self.element_is_visible(FormLocators().SUBMIT).click()
 

@@ -10,6 +10,7 @@ from src.ui.demoq.selenium.pages.elements.check_box_page import CheckBoxPage
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.CHecKBOX.value}"
 RUN_IDS = [f"Проверка выделения случайного чекбокса ({i})" for i in range(5)]
 
+
 @allure.parent_suite("UI-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Check Box")

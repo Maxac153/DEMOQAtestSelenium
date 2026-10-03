@@ -56,3 +56,5 @@ allure serve output/allure-results
 7. Понять как настроить "Система выполнения тестов" в allure
 8. Разобраться с async
 9. Понять как делать диаграмму с запусками тестов
+10. Дописать ui тесты book_store_application
+11. Дописать ui тесты [.py](src/ui/demoq/selenium/tests/widgets/test_9_select_menu.py)

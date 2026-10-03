@@ -24,4 +24,5 @@ class TestSliderPage:
         progress_bar.open()
         before, after = progress_bar.change_progress_bar_value()
 
-        assert before != after, "the progress bar value has not been changed"
+        with allure.step("Проверка изменения состояния кнопок"):
+            assert before != after, "the progress bar value has not been changed"

@@ -27,7 +27,9 @@ class TestSliderPage:
         use_button, use_content = tabs.check_tabs("use")
         more_button, more_content = tabs.check_tabs("more")
 
-        assert what_button == "What" and what_content != 0, "Вкладка «what» не была нажата, или текст отсутствует"
-        assert origin_button == "Origin" and origin_content != 0, "Вкладка «origin» не была нажата, или текст отсутствует"
-        assert use_button == "Use" and use_content != 0, "Вкладка «use» не была нажата, или текст отсутствует"
-        assert more_button == "More" and what_content != 0, "Вкладка «more» не была нажата, или текст отсутствует"
+        with allure.step("Проверка изменения состояния кнопок"):
+            # TODO Переписать на параметризацию
+            assert what_button == "What" and what_content != 0, "Вкладка «what» не была нажата, или текст отсутствует"
+            assert origin_button == "Origin" and origin_content != 0, "Вкладка «origin» не была нажата, или текст отсутствует"
+            assert use_button == "Use" and use_content != 0, "Вкладка «use» не была нажата, или текст отсутствует"
+            assert more_button == "More" and what_content != 0, "Вкладка «more» не была нажата, или текст отсутствует"

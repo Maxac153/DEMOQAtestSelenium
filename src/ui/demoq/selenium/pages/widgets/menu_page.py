@@ -5,7 +5,7 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class MenuPage(BasePage):
-    @allure.step('check menu item')
+    @allure.step("check menu item")
     def check_menu(self) -> list[str]:
         menu_item_list = self.elements_are_present(MenuLocators().MENU_ITEM_LIST)
         data = []

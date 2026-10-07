@@ -2,6 +2,7 @@ import os
 
 import allure
 import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.pages.interactions.droppable_page import DroppablePage
@@ -18,7 +19,10 @@ class TestDroppablePage:
     @pytest.mark.positive
     @allure.story("Простое перетаскивание элемента")
     @allure.title("Проверка простого перетаскивания элемента")
-    def test_simple_droppable(self, driver) -> None:
+    def test_simple_droppable(
+            self,
+            driver: WebDriver
+    ):
         droppable_page = DroppablePage(driver, BASE_URL)
         droppable_page.open()
         text = droppable_page.drop_simple()
@@ -31,7 +35,10 @@ class TestDroppablePage:
     @pytest.mark.positive
     @allure.story("Перетаскивание только разрешенного элемента")
     @allure.title("Проверка приема и отклонения элемента")
-    def test_accept_droppable(self, driver) -> None:
+    def test_accept_droppable(
+            self,
+            driver: WebDriver
+    ):
         droppable_page = DroppablePage(driver, BASE_URL)
         droppable_page.open()
         not_accept, accept = droppable_page.drop_accept()
@@ -45,7 +52,10 @@ class TestDroppablePage:
     @pytest.mark.positive
     @allure.story("Предотвращение всплытия события перетаскивания")
     @allure.title("Проверка поведения вложенных областей при перетаскивании")
-    def test_prevent_propagation_droppable(self, driver) -> None:
+    def test_prevent_propagation_droppable(
+            self,
+            driver: WebDriver
+    ):
         droppable_page = DroppablePage(driver, BASE_URL)
         droppable_page.open()
         (not_greedy, not_greedy_inner, greedy, greedy_inner) = droppable_page.drop_prevent_propagation()
@@ -61,7 +71,10 @@ class TestDroppablePage:
     @pytest.mark.positive
     @allure.story("Возврат элемента после перетаскивания")
     @allure.title("Проверка возврата draggable-элементов")
-    def test_revert_draggable_droppable(self, driver) -> None:
+    def test_revert_draggable_droppable(
+            self,
+            driver: WebDriver
+    ):
         droppable_page = DroppablePage(driver, BASE_URL)
         droppable_page.open()
         will_after_move, will_after_revert = (droppable_page.drop_revert_draggable("will"))

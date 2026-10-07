@@ -19,7 +19,10 @@ class TestAlertsPage:
     @pytest.mark.positive
     @allure.story("Проверка открытия алерта")
     @allure.title("Проверка открытия оповещения")
-    def test_alert_appears_on_click(self, driver: WebDriver):
+    def test_alert_appears_on_click(
+            self,
+            driver: WebDriver
+    ):
         alert_page = AlertsPage(driver, BASE_URL)
         alert_page.open()
         alert_text = alert_page.check_see_alert()
@@ -32,7 +35,10 @@ class TestAlertsPage:
     @pytest.mark.positive
     @allure.story("Проверка открытия алерта")
     @allure.title("Проверка открытия оповещения через 5 секунд")
-    def test_alert_appear_5_sec(self, driver: WebDriver):
+    def test_alert_appear_5_sec(
+            self,
+            driver: WebDriver
+    ):
         alert_page = AlertsPage(driver, BASE_URL)
         alert_page.open()
         alert_text = alert_page.check_alert_appear_5_sec()
@@ -45,7 +51,10 @@ class TestAlertsPage:
     @pytest.mark.positive
     @allure.story("Проверка открытия алерта")
     @allure.title("Проверка срабатывания оповещения с подтверждением")
-    def test_confirm_alert_ok(self, driver: WebDriver):
+    def test_confirm_alert_ok(
+            self,
+            driver: WebDriver
+    ):
         alert_page = AlertsPage(driver, BASE_URL)
         alert_page.open()
         alert_text = alert_page.check_confirm_alert()
@@ -58,7 +67,10 @@ class TestAlertsPage:
     @pytest.mark.positive
     @allure.story("Проверка открытия алерта")
     @allure.title("Проверка открытия оповещения с запросом")
-    def test_prompt_alert(self, driver: WebDriver):
+    def test_prompt_alert(
+            self,
+            driver: WebDriver
+    ):
         alert_page = AlertsPage(driver, BASE_URL)
         alert_page.open()
         text, alert_text = alert_page.check_prompt_alert()

@@ -2,6 +2,7 @@ import os
 
 import allure
 import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.pages.widgets.accordian_page import AccordionPage
@@ -38,7 +39,12 @@ class TestAccordionPage:
     )
     @allure.story("Проверка виджета-аккордеона")
     @allure.title("Проверка секции аккордеона: {expected_title}")
-    def test_accordion_section(self, driver, section_name, expected_title):
+    def test_accordion_section(
+            self,
+            driver: WebDriver,
+            section_name: str,
+            expected_title: str
+    ):
         accordion_page = AccordionPage(driver, BASE_URL)
         accordion_page.open()
         actual_title, has_content = accordion_page.open_accordion_section(section_name)

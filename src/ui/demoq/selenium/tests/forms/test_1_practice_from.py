@@ -2,6 +2,7 @@ import os
 
 import allure
 import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.pages.form.form_page import FormPage
@@ -18,7 +19,10 @@ class TestFormPage:
     @pytest.mark.positive
     @allure.story("Заполнение формы регистрации")
     @allure.title("Проверка успешного заполнения формы регистрации")
-    def test_form(self, driver) -> None:
+    def test_form(
+            self,
+            driver: WebDriver
+    ):
         form_page = FormPage(driver, BASE_URL)
         form_page.open()
         person = form_page.fill_form_fields(rf"input/img/test_file.txt")

@@ -40,13 +40,7 @@ class TestNestedFramesPage:
         parent_text, child_text = nested_frame_page.check_nested_frame()
 
         with allure.step(f"Проверка текста родительского фрейма: '{parent_text}'"):
-            assert parent_text == expected_parent, (
-                f"Текст родительского фрейма не совпадает. "
-                f"Ожидалось: '{expected_parent}', получено: '{parent_text}'"
-            )
+            assert parent_text == expected_parent, f"Текст родительского фрейма не совпадает. Ожидалось: '{expected_parent}', получено: '{parent_text}'"
 
         with allure.step(f"Проверка текста дочернего фрейма: '{child_text}'"):
-            assert child_text == expected_child, (
-                f"Текст дочернего фрейма не совпадает. "
-                f"Ожидалось: '{expected_child}', получено: '{child_text}'"
-            )
+            assert child_text == expected_child, f"Текст дочернего фрейма не совпадает. Ожидалось: '{expected_child}', получено: '{child_text}'"

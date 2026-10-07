@@ -19,7 +19,10 @@ class TestModalDialogsPage:
     @pytest.mark.positive
     @allure.story("Проверка модальных диалогов")
     @allure.title("Проверка содержимого малого и большого модальных окон")
-    def test_modal_dialogs(self, driver: WebDriver):
+    def test_modal_dialogs(
+            self,
+            driver: WebDriver
+    ):
         modal_dialogs_page = ModalDialogsPage(driver, BASE_URL)
         modal_dialogs_page.open()
         small, large = modal_dialogs_page.get_modal_data()
@@ -27,13 +30,7 @@ class TestModalDialogsPage:
         large_title, large_text = large
 
         with allure.step("Проверка заголовка малого модального окна"):
-            assert small_title == "Small Modal", (
-                f"Заголовок малого окна не совпадает. "
-                f"Ожидалось: 'Small Modal', получено: '{small_title}'"
-            )
+            assert small_title == "Small Modal", f"Заголовок малого окна не совпадает. Ожидалось: 'Small Modal', получено: '{small_title}'"
 
         with allure.step("Проверка заголовка большого модального окна"):
-            assert large_title == "Large Modal", (
-                f"Заголовок большого окна не совпадает. "
-                f"Ожидалось: 'Large Modal', получено: '{large_title}'"
-            )
+            assert large_title == "Large Modal", f"Заголовок большого окна не совпадает. Ожидалось: 'Large Modal', получено: '{large_title}'"

@@ -28,7 +28,13 @@ class TestsBrokenLinksAndImages:
             ("Проверка нажатия на Links (BROKEN_IMAGE)", BrokenImages.BROKEN_IMAGE, True)
         ]
     )
-    def test_images(self, driver: WebDriver, test_case_name: str, image: BrokenImages, broken_images: bool):
+    def test_images(
+            self,
+            driver: WebDriver,
+            test_case_name: str,
+            image: BrokenImages,
+            broken_images: bool
+    ):
         broken_links_page = BrokenLinksAndImagesPage(driver, BASE_URL)
         broken_links_page.open()
         result = broken_links_page.select_image(image)
@@ -48,7 +54,13 @@ class TestsBrokenLinksAndImages:
             ("Проверка нажатия на Links (CLICK BROKEN LINK)", BrokenLinks.BROKEN_LINK, BrokenLinks.BROKEN_LINK.value)
         ]
     )
-    def test_links(self, driver: WebDriver, test_case_name: str, select_links: BrokenLinks, expected_result: str):
+    def test_links(
+            self,
+            driver: WebDriver,
+            test_case_name: str,
+            select_links: BrokenLinks,
+            expected_result: str
+    ):
         broken_links_page = BrokenLinksAndImagesPage(driver, BASE_URL)
         broken_links_page.open()
         result = broken_links_page.open_new_tab(select_links)

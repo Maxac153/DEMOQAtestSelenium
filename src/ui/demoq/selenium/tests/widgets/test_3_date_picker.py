@@ -2,6 +2,7 @@ import os
 
 import allure
 import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.pages.widgets.date_picker_page import DatePickerPage
@@ -18,7 +19,10 @@ class TestDatePickerPage:
     @pytest.mark.positive
     @allure.story("Проверка выбора даты")
     @allure.title("Проверка изменения даты")
-    def test_change_date(self, driver):
+    def test_change_date(
+            self,
+            driver: WebDriver
+    ):
         date_picker_page = DatePickerPage(driver, BASE_URL)
         date_picker_page.open()
         value_date_before, value_date_after = date_picker_page.select_date()
@@ -31,7 +35,10 @@ class TestDatePickerPage:
     @pytest.mark.positive
     @allure.story("Проверка выбора даты и времени")
     @allure.title("Проверка изменения даты и времени")
-    def test_change_date_and_time(self, driver):
+    def test_change_date_and_time(
+            self,
+            driver: WebDriver
+    ):
         date_picker_page = DatePickerPage(driver, BASE_URL)
         date_picker_page.open()
         value_date_before, value_date_after = date_picker_page.select_date_and_time()

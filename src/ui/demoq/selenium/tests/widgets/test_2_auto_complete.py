@@ -2,6 +2,7 @@ import os
 
 import allure
 import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.pages.widgets.auto_complete_page import AutoCompletePage
@@ -18,61 +19,49 @@ class TestAutoCompletePage:
     @pytest.mark.positive
     @allure.story("Множественный автозаполнитель")
     @allure.title("Проверка заполнения поля множественного автозаполнения")
-    def test_fill_multi_autocomplete(self, driver):
+    def test_fill_multi_autocomplete(
+            self,
+            driver: WebDriver
+    ):
         autocomplete_page = AutoCompletePage(driver, BASE_URL)
         autocomplete_page.open()
-
         expected_colors = autocomplete_page.fill_input_multi()
         actual_colors = autocomplete_page.check_color_in_multi()
 
-        with allure.step(
-            "Проверка выбранных значений в поле автозаполнения"
-        ):
-            assert expected_colors == actual_colors, (
-                "Добавленные цвета отсутствуют в поле автозаполнения"
-            )
+        with allure.step("Проверка выбранных значений в поле автозаполнения"):
+            assert expected_colors == actual_colors, "Добавленные цвета отсутствуют в поле автозаполнения"
 
     @pytest.mark.ui
     @pytest.mark.smoke
     @pytest.mark.positive
     @allure.story("Множественный автозаполнитель")
     @allure.title("Проверка удаления значения из автозаполнения")
-    def test_remove_value_from_multi(self, driver):
+    def test_remove_value_from_multi(
+            self,
+            driver: WebDriver
+    ):
         autocomplete_page = AutoCompletePage(driver, BASE_URL)
         autocomplete_page.open()
-
         autocomplete_page.fill_input_multi()
+        count_before, count_after = autocomplete_page.remove_value_from_multi()
 
-        count_before, count_after = (
-            autocomplete_page.remove_value_from_multi()
-        )
-
-        with allure.step(
-            "Проверка удаления одного значения"
-        ):
-            assert count_before != count_after, (
-                "Значение не было удалено"
-            )
-
-            assert count_after == count_before - 1, (
-                "Было удалено более одного значения"
-            )
+        with allure.step("Проверка удаления одного значения"):
+            assert count_before != count_after, "Значение не было удалено"
+            assert count_after == count_before - 1, "Было удалено более одного значения"
 
     @pytest.mark.ui
     @pytest.mark.smoke
     @pytest.mark.positive
     @allure.story("Одиночный автозаполнитель")
     @allure.title("Проверка заполнения одиночного автозаполнения")
-    def test_fill_single_autocomplete(self, driver):
+    def test_fill_single_autocomplete(
+            self,
+            driver: WebDriver
+    ):
         autocomplete_page = AutoCompletePage(driver, BASE_URL)
         autocomplete_page.open()
-
         expected_color = autocomplete_page.fill_input_single()
         actual_color = autocomplete_page.get_color_in_single()
 
-        with allure.step(
-            "Проверка выбранного значения в одиночном автозаполнении"
-        ):
-            assert expected_color == actual_color, (
-                "Добавленный цвет отсутствует в поле автозаполнения"
-            )
+        with allure.step("Проверка выбранного значения в одиночном автозаполнении"):
+            assert expected_color == actual_color, "Добавленный цвет отсутствует в поле автозаполнения"

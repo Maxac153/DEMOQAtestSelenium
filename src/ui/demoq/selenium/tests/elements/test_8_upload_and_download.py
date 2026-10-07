@@ -25,7 +25,12 @@ class TestsUploadAndDownload:
             ("Проверка скачивания картинки", rf"input/img/file_test.jpeg")
         ]
     )
-    def test_download_file(self, driver: WebDriver, test_case_name: str, file_path: str):
+    def test_download_file(
+            self,
+            driver: WebDriver,
+            test_case_name: str,
+            file_path: str
+    ):
         upload_download_page = UploadAndDownloadPage(driver, BASE_URL)
         upload_download_page.open()
         result = upload_download_page.download_file(file_path)
@@ -44,7 +49,12 @@ class TestsUploadAndDownload:
             ("Проверка загрузки файла", rf"input/img/test_file.txt")
         ]
     )
-    def test_upload_file(self, driver: WebDriver, test_case_name: str, file_path: str):
+    def test_upload_file(
+            self,
+            driver: WebDriver,
+            test_case_name: str,
+            file_path: str
+    ):
         upload_download_page = UploadAndDownloadPage(driver, BASE_URL)
         upload_download_page.open()
         file_name, result = upload_download_page.upload_file(file_path)

@@ -56,7 +56,7 @@ class TestsButton:
         result = web_table_page.get_persons()
 
         with allure.step("Проверка добавления нового person"):
-            assert [" ".join(new_person)] in result, f""
+            assert [" ".join(new_person)] in result, ""
 
     @pytest.mark.ui
     @pytest.mark.smoke
@@ -209,5 +209,4 @@ class TestsButton:
         count = web_table_page.select_up_to_some_rows()
 
         with allure.step("Строки не найдены"):
-            assert count == [10, 20, 30, 40, 50], \
-                "Количество строк в таблице не изменилось или изменилось некорректно"
+            assert count == [10, 20, 30, 40, 50], "Количество строк в таблице не изменилось или изменилось некорректно"

@@ -1,5 +1,4 @@
 import allure
-from _pytest.mark import ParameterSet
 
 from src.ui.demoq.selenium.locators.widgets.accordian_locators import AccordianLocators
 from src.ui.demoq.selenium.pages.__common.base_page import BasePage
@@ -7,7 +6,7 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 class AccordionPage(BasePage):
     @allure.step("Открыть секцию аккордеона и получить её заголовок и текст")
-    def open_accordion_section(self, accordion_num: ParameterSet):
+    def open_accordion_section(self, accordion_num: str):
         accordian = {
             "first": AccordianLocators.SECTION_FIRST,
             "second": AccordianLocators.SECTION_SECOND,

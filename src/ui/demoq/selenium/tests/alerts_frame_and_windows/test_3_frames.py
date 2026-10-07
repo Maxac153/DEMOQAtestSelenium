@@ -34,7 +34,12 @@ class TestFramesPage:
     )
     @allure.story("Проверка iframe")
     @allure.title("Проверка отображения данных в iframe")
-    def test_frames(self, driver: WebDriver, frame_name: str, expected_result: list[str]):
+    def test_frames(
+            self,
+            driver: WebDriver,
+            frame_name: str,
+            expected_result: list[str]
+    ):
         frames_page = FramesPage(driver, BASE_URL)
         frames_page.open()
         actual_result = frames_page.frame(frame_name)

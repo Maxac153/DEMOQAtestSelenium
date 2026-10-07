@@ -2,6 +2,7 @@ import os
 
 import allure
 import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.pages.interactions.sortable_page import SortablePage
@@ -18,7 +19,10 @@ class TestSortablePage:
     @pytest.mark.positive
     @allure.story("Проверка виджета-аккордеона")
     @allure.title("Проверить измененный сортируемый список и сетку")
-    def test_sortable(self, driver):
+    def test_sortable(
+            self,
+            driver: WebDriver
+    ):
         sortable_page = SortablePage(driver, BASE_URL)
         sortable_page.open()
         list_before, list_after = sortable_page.change_list_order()

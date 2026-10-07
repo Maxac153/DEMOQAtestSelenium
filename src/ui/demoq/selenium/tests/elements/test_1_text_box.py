@@ -66,7 +66,12 @@ class TestsTextBox:
             )
         ],
     )
-    def test_text_box(self, driver: WebDriver, test_case_name: str, data: TextBox):
+    def test_text_box(
+            self,
+            driver: WebDriver,
+            test_case_name: str,
+            data: TextBox
+    ):
         text_box_page = TextBoxPage(driver, BASE_URL)
         text_box_page.open()
         text_box_page.submit_form(data)
@@ -127,7 +132,12 @@ class TestsTextBox:
 
         ],
     )
-    def test_text_box_email(self, driver: WebDriver, test_case_name: str, data: TextBox):
+    def test_text_box_email(
+            self,
+            driver: WebDriver,
+            test_case_name: str,
+            data: TextBox
+    ):
         text_box_page = TextBoxPage(driver, BASE_URL)
         text_box_page.open()
         text_box_page.submit_form(data)

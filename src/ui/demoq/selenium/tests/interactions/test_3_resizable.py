@@ -2,6 +2,7 @@ import os
 
 import allure
 import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.pages.interactions.resizable_page import ResizablePage
@@ -18,7 +19,10 @@ class TestResizablePage:
     @pytest.mark.positive
     @allure.story("Проверка виджета-аккордеона")
     @allure.title("Проверить измененные масштабируемые блоки")
-    def test_resizable(self, driver):
+    def test_resizable(
+            self,
+            driver: WebDriver
+    ):
         resizable_page = ResizablePage(driver, BASE_URL)
         resizable_page.open()
         max_box, min_box = resizable_page.change_size_resizable_box()

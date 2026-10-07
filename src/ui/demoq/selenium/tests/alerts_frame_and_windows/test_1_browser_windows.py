@@ -19,7 +19,10 @@ class TestBrowserWindows:
     @pytest.mark.positive
     @allure.story("Проверка открытия нового окна или вкладки")
     @allure.title("Проверка открытия новой вкладки")
-    def test_open_new_tab(self, driver: WebDriver):
+    def test_open_new_tab(
+            self,
+            driver: WebDriver
+    ):
         browser_windows_page = WindowsPage(driver, BASE_URL)
         browser_windows_page.open()
         text_result = browser_windows_page.opened_new_tab()
@@ -32,7 +35,10 @@ class TestBrowserWindows:
     @pytest.mark.positive
     @allure.story("Проверка открытия нового окна или вкладки")
     @allure.title("Проверка открытия нового окна")
-    def test_open_new_window(self, driver: WebDriver):
+    def test_open_new_window(
+            self,
+            driver: WebDriver
+    ):
         browser_windows_page = WindowsPage(driver, BASE_URL)
         browser_windows_page.open()
         text_result = browser_windows_page.opened_new_window()
@@ -46,7 +52,10 @@ class TestBrowserWindows:
     # @pytest.mark.positive
     # @allure.story("Проверка открытия нового окна или вкладки")
     # @allure.title("Проверка открытия нового окна с сообщением")
-    # def test_open_new_window_with_message(self, driver: WebDriver):
+    # def test_open_new_window_with_message(
+    # self,
+    # driver: WebDriver
+    # ):
     #     browser_windows_page = WindowsPage(driver, BASE_URL)
     #     browser_windows_page.open()
     #     text_result = browser_windows_page.opened_new_window_with_message()

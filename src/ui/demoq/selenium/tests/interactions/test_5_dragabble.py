@@ -2,6 +2,7 @@ import os
 
 import allure
 import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.pages.interactions.draggable_page import DraggablePage
@@ -18,7 +19,10 @@ class TestDraggablePage:
     @pytest.mark.positive
     @allure.story("Простое перетаскивание элемента")
     @allure.title("Проверка простого перетаскивания элемента")
-    def test_simple_draggable(self, driver):
+    def test_simple_draggable(
+            self,
+            driver: WebDriver
+    ):
         draggable_page = DraggablePage(driver, BASE_URL)
         draggable_page.open()
         before, after = draggable_page.simple_drag_box()
@@ -31,7 +35,10 @@ class TestDraggablePage:
     @pytest.mark.positive
     @allure.story("Перетаскивание элемента по заданной оси")
     @allure.title("Проверка ограничения перетаскивания по горизонтальной и вертикальной оси")
-    def test_axis_restricted_draggable(self, driver):
+    def test_axis_restricted_draggable(
+            self,
+            driver: WebDriver
+    ):
         draggable_page = DraggablePage(driver, BASE_URL)
         draggable_page.open()
         top_x, left_x = draggable_page.axis_restricted_x()

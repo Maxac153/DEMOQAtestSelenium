@@ -2,6 +2,7 @@ import os
 
 import allure
 import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.pages.widgets.menu_page import MenuPage
@@ -18,7 +19,10 @@ class TestMenuPage:
     @pytest.mark.positive
     @allure.story("Проверка пунктов меню")
     @allure.title("Проверка всех пунктов меню")
-    def test_menu_items(self, driver):
+    def test_menu_items(
+            self,
+            driver: WebDriver
+    ):
         menu_page = MenuPage(driver, BASE_URL)
         menu_page.open()
         result = menu_page.get_menu_items()

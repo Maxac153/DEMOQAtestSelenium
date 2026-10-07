@@ -2,14 +2,12 @@ import os
 
 import allure
 import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.pages.widgets.tool_tips_page import ToolTipsPage
 
-BASE_URL = (
-    f'{os.environ.get("DEMOQA_HOST")}'
-    f"{EndpointsDemoq.TOOL_TIPS.value}"
-)
+BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.TOOL_TIPS.value}"
 
 
 @allure.parent_suite("UI-тесты")
@@ -46,7 +44,12 @@ class TestToolTips:
     )
     @allure.story("Проверка всплывающих подсказок")
     @allure.title("Проверка текста подсказки: {tooltip_type}")
-    def test_tooltip_text(self, driver, tooltip_type, expected_text):
+    def test_tooltip_text(
+            self,
+            driver: WebDriver,
+            tooltip_type: str,
+            expected_text: str
+    ):
         tool_tips_page = ToolTipsPage(driver, BASE_URL)
         tool_tips_page.open()
         actual_text = tool_tips_page.get_tooltip_text_by_type(tooltip_type)

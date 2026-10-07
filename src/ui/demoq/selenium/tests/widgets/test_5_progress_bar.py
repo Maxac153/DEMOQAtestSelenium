@@ -2,6 +2,7 @@ import os
 
 import allure
 import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.pages.widgets.progress_bar_page import ProgressBarPage
@@ -18,7 +19,10 @@ class TestProgressBarPage:
     @pytest.mark.positive
     @allure.story("Проверка виджета Progress Bar")
     @allure.title("Проверка изменения значения Progress Bar")
-    def test_progress_bar(self, driver):
+    def test_progress_bar(
+            self,
+            driver: WebDriver
+    ):
         progress_bar_page = ProgressBarPage(driver, BASE_URL)
         progress_bar_page.open()
         value_before, value_after = (progress_bar_page.change_progress_bar_value())

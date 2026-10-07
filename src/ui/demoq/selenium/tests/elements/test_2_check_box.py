@@ -21,7 +21,11 @@ class TestsCheckBox:
     @allure.story("Выбор чекбоксов по путям")
     @allure.title("Проверка случайного выбора путей чекбоксов ({run_id})")
     @pytest.mark.parametrize("run_id", RUN_IDS, ids=RUN_IDS)
-    def test_check_box_random_paths(self, driver: WebDriver, run_id: str):
+    def test_check_box_random_paths(
+            self,
+            driver: WebDriver,
+            run_id: str
+    ):
         check_box_page = CheckBoxPage(driver, BASE_URL)
         check_box_page.open()
         select_items, result = check_box_page.select_path()
@@ -36,7 +40,11 @@ class TestsCheckBox:
     @allure.story("Выделение отдельного элемента")
     @allure.title("Проверка выделения случайного чекбокса ({run_id})")
     @pytest.mark.parametrize("run_id", RUN_IDS, ids=RUN_IDS)
-    def test_check_box_select_item(self, driver: WebDriver, run_id: str):
+    def test_check_box_select_item(
+            self,
+            driver: WebDriver,
+            run_id: str
+    ):
         check_box_page = CheckBoxPage(driver, BASE_URL)
         check_box_page.open()
         result, check_box_select = check_box_page.select_item()

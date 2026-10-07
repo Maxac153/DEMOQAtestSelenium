@@ -7,21 +7,19 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class WindowsPage(BasePage):
-    def _switch_to_new_window(self):
-        """Переключение на новое окно/вкладку с ожиданием."""
+    @allure.step("Переключиться на новое окно или вкладку")
+    def switch_to_new_window(self, timeout: int = 5) -> str:
         current_window = self.driver.current_window_handle
-        # TODO переделать
-        WebDriverWait(self.driver, 10).until(
-            lambda d: len(d.window_handles) > 1
-        )
-        for handle in self.driver.window_handles:
-            if handle != current_window:
-                self.driver.switch_to.window(handle)
-                return handle
-        raise RuntimeError("Новое окно не открылось")
+        new_window = self.wait_new_window(current_window, timeout)
+        self.driver.switch_to.window(new_window)
+
+        return new_window
+
+    @allure.step("Переключиться на новое окно или вкладку")
+    def _switch_to_new_window(self) -> str:
+        return self.switch_to_new_window()
 
     def _return_to_original_window(self, original_handle: str):
-        """Закрытие текущего окна и возврат к исходному."""
         self.driver.close()
         self.driver.switch_to.window(original_handle)
 

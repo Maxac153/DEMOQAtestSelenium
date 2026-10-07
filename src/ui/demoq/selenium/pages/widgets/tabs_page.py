@@ -5,29 +5,30 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class TabsPage(BasePage):
-    @allure.step("check tabs")
-    def check_tabs(self, name_tab):
+    @allure.step("Открытие вкладки «{tab_name}» и получение её содержимого")
+    def open_tab_and_get_content_length(self, tab_name):
+        locators = TabsLocators()
         tabs = {
             "what": {
-                "title": TabsLocators().TABS_WHAT,
-                "content": TabsLocators().TABS_WHAT_CONTENT
+                "title": locators.TABS_WHAT,
+                "content": locators.TABS_WHAT_CONTENT,
             },
             "origin": {
-                "title": TabsLocators().TABS_ORIGIN,
-                "content": TabsLocators().TABS_ORIGIN_CONTENT
+                "title": locators.TABS_ORIGIN,
+                "content": locators.TABS_ORIGIN_CONTENT,
             },
             "use": {
-                "title": TabsLocators().TABS_USE,
-                "content": TabsLocators().TABS_USE_CONTENT
+                "title": locators.TABS_USE,
+                "content": locators.TABS_USE_CONTENT,
             },
             "more": {
-                "title": TabsLocators().TABS_MORE,
-                "content": TabsLocators().TABS_MORE_CONTENT
-            }
+                "title": locators.TABS_MORE,
+                "content": locators.TABS_MORE_CONTENT,
+            },
         }
 
-        button = self.element_is_visible(tabs[name_tab]["title"])
-        button.click()
-        what_content = self.element_is_visible(tabs[name_tab]["content"]).text
+        tab = self.element_is_visible(tabs[tab_name]["title"])
+        tab.click()
+        content = self.element_is_visible(tabs[tab_name]["content"]).text
 
-        return button.text, len(what_content)
+        return tab.text, len(content)

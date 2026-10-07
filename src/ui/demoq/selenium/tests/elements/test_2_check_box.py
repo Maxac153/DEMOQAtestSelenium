@@ -7,7 +7,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.pages.elements.check_box_page import CheckBoxPage
 
-BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.CHecKBOX.value}"
+BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.CHECKBOX.value}"
 RUN_IDS = [f"Проверка выделения случайного чекбокса ({i})" for i in range(5)]
 
 

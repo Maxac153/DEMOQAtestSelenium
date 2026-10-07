@@ -17,8 +17,7 @@ class TestResizablePage:
     @pytest.mark.smoke
     @pytest.mark.positive
     @allure.story("Проверка виджета-аккордеона")
-    @allure.feature("Date Picker Page")
-    @allure.title("Check changed resizable boxes")
+    @allure.title("Проверить измененные масштабируемые блоки")
     def test_resizable(self, driver):
         resizable_page = ResizablePage(driver, BASE_URL)
         resizable_page.open()
@@ -26,6 +25,6 @@ class TestResizablePage:
         max_resize, min_resize = resizable_page.change_size_resizable()
 
         with allure.step("Проверка изменения состояния кнопок"):
-            assert ("200px", "200px") == max_box, "maximum size not equal to '200px', '200px'"
-            assert ("150px", "150px") == min_box, "minimum size not equal to '150px', '150px'"
-            assert min_resize != max_resize, "resizable has not been changed"
+            assert ("200px", "200px") == max_box, "Максимальный размер не равен'200px', '200px'"
+            assert ("150px", "150px") == min_box, "Максимальный размер не равен '150px', '150px'"
+            assert min_resize != max_resize, "Resizable не был изменен"

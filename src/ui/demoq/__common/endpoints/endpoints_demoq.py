@@ -4,7 +4,7 @@ from enum import Enum
 class EndpointsDemoq(Enum):
     # Elements
     TEXT_BOX = "/text-box"
-    CHecKBOX = "/checkbox"
+    CHECKBOX = "/checkbox"
     RADIO_BUTTON = "/radio-button"
     WEB_TABLES = "/webtables"
     BUTTONS = "/buttons"
@@ -36,7 +36,7 @@ class EndpointsDemoq(Enum):
 
     # Interactions
     SORTABLE = "/sortable"
-    SELecTABLE = "/selectable"
+    SELECTABLE = "/selectable"
     RESIZABLE = "/resizable"
     DROPPABLE = "/droppable"
     DRAGABBLE = "/dragabble"

@@ -12,6 +12,6 @@ class ToolTipsLocators:
     TOOL_TIP_CONTRARY = (By.CSS_SELECTOR, "a[aria-describedby='contraryTexToolTip']")
 
     SECTION_LINK = (By.XPATH, "//*[.='1.10.32']")
-    TOOL_TIP_SecTION = (By.CSS_SELECTOR, "a[aria-describedby='sectionToolTip']")
+    TOOL_TIP_SECTION = (By.CSS_SELECTOR, "a[aria-describedby='sectionToolTip']")
 
     TOOL_TIPS_INNERS = (By.CSS_SELECTOR, "div[class='tooltip-inner']")

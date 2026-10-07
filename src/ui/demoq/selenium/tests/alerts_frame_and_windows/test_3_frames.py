@@ -40,8 +40,4 @@ class TestFramesPage:
         actual_result = frames_page.frame(frame_name)
 
         with allure.step(f"Проверка содержимого {frame_name}: текст и размеры"):
-            assert actual_result == expected_result, (
-                f"Некорректные данные в {frame_name}. "
-                f"Ожидалось: {expected_result}, "
-                f"получено: {actual_result}"
-            )
+            assert actual_result == expected_result, f"Некорректные данные в {frame_name}. Ожидалось: {expected_result}, получено: {actual_result}"

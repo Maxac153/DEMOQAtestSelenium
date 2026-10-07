@@ -5,11 +5,20 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class DynamicPropertiesPage(BasePage):
-    @allure.step("Ожидание изменение состояний кнопок")
-    def button_click(self) -> tuple[bool, str | None, str]:
-        button_visible = self.element_is_visible(DynamicPropertiesLocators.BUTTON_VISIBLE, 10).text
-        button_enable = self.element_is_visible(DynamicPropertiesLocators.BUTTON_ENABLE_5S).is_enabled()
-        button_color_change = (self.element_is_visible(DynamicPropertiesLocators.BUTTON_COLOR_CHANGE)
-                               .get_attribute("class"))
+    @allure.step("Проверка активации кнопки через 5 секунд")
+    def is_enable_button_enabled(self) -> bool:
+        button = self.element_is_visible(DynamicPropertiesLocators.BUTTON_ENABLE_5S, 10)
 
-        return button_enable, button_color_change, button_visible
+        return button.is_enabled()
+
+    @allure.step("Получение CSS-классов кнопки с изменяющимся цветом")
+    def get_color_change_button_class(self) -> str | None:
+        button = self.element_is_visible(DynamicPropertiesLocators.BUTTON_COLOR_CHANGE, 10)
+
+        return button.get_attribute("class")
+
+    @allure.step("Получение текста отображаемой кнопки")
+    def get_visible_button_text(self) -> str:
+        button = self.element_is_visible(DynamicPropertiesLocators.BUTTON_VISIBLE, 10)
+
+        return button.text

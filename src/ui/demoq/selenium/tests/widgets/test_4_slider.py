@@ -9,20 +9,19 @@ from src.ui.demoq.selenium.pages.widgets.slider_page import SliderPage
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.SLIDER.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-тесты")
 @allure.suite("DemoQA")
 @allure.feature("Страница Slider")
 class TestSliderPage:
     @pytest.mark.ui
     @pytest.mark.smoke
     @pytest.mark.positive
-    @allure.story("Проверка виджета-аккордеона")
-    @allure.feature("Date Picker Page")
-    @allure.title("Check moved slider")
+    @allure.story("Проверка виджета слайдера")
+    @allure.title("Проверка изменения значения слайдера")
     def test_slider(self, driver):
-        slider = SliderPage(driver, BASE_URL)
-        slider.open()
-        before, after = slider.change_slider_value()
+        slider_page = SliderPage(driver, BASE_URL)
+        slider_page.open()
+        value_before, value_after = slider_page.change_slider_value()
 
-        with allure.step("Проверка изменения состояния кнопок"):
-            assert before == after, "the slider value has not been changed"
+        with allure.step("Проверка изменения значения слайдера"):
+            assert value_before != value_after, "Значение слайдера не изменилось"

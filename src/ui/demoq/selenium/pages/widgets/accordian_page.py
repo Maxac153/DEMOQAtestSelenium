@@ -1,31 +1,23 @@
 import allure
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.wait import WebDriverWait
+from _pytest.mark import ParameterSet
 
 from src.ui.demoq.selenium.locators.widgets.accordian_locators import AccordianLocators
 from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
-class AccordianPage(BasePage):
-    @allure.step("check accordian widget")
-    def check_accordian(self, accordian_num: str):
+class AccordionPage(BasePage):
+    @allure.step("Открыть секцию аккордеона и получить её заголовок и текст")
+    def open_accordion_section(self, accordion_num: ParameterSet):
         accordian = {
             "first": AccordianLocators.SECTION_FIRST,
             "second": AccordianLocators.SECTION_SECOND,
             "third": AccordianLocators.SECTION_THIRD,
         }
 
-        # 1. Находим секцию
-        section = self.element_is_visible(accordian[accordian_num])
-
-        # 2. Находим кнопку внутри секции и кликаем
+        section = self.element_is_visible(accordian[accordion_num])
         button = section.find_element(*AccordianLocators.SECTION_BUTTON)
         button.click()
-
-        # 3. Ждём видимости accordion-body ВНУТРИ этой секции
-        # TODO Переделать
-        wait = WebDriverWait(self.driver, 10)
-        body = wait.until(ec.visibility_of(section.find_element(*AccordianLocators.SECTION_BODY)))
-
+        body = self.child_element_is_visible(section, AccordianLocators.SECTION_BODY)
         text = body.text.strip()
+
         return button.text.strip(), bool(text)

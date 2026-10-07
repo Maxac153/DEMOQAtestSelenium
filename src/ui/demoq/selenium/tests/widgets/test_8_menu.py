@@ -21,7 +21,7 @@ class TestMenuPage:
     def test_menu_items(self, driver):
         menu_page = MenuPage(driver, BASE_URL)
         menu_page.open()
-        result = menu_page.check_menu()
+        result = menu_page.get_menu_items()
 
         with allure.step("Проверка изменения состояния кнопок"):
             assert result == [

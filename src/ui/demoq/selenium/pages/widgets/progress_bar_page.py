@@ -8,7 +8,7 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class ProgressBarPage(BasePage):
-    @allure.step("change progress bar value")
+    @allure.step("Запустить прогресс-бар, остановить его через несколько секунд и получить значения до и после")
     def change_progress_bar_value(self):
         value_before = self.element_is_present(ProgressBarLocators().PROGRESS_BAR_VALUE).text
         progress_bar_button = self.element_is_clickable(ProgressBarLocators().PROGRESS_BAR_BUTTON)

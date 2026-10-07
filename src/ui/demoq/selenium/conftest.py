@@ -98,6 +98,6 @@ def pytest_runtest_makereport(item, call):
                 if hasattr(driver_fixture, "get_screenshot_as_png"):
                     allure.attach(
                         driver_fixture.get_screenshot_as_png(),
-                        name="Screenshot on failure",
+                        name="Снимок экрана при сбое",
                         attachment_type=AttachmentType.PNG
                     )

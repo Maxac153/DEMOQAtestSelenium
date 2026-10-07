@@ -9,20 +9,23 @@ from src.ui.demoq.selenium.pages.form.form_page import FormPage
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.AUTOMATION_PRACTICE_FORM.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-тесты")
 @allure.suite("DemoQA")
 @allure.feature("Страница Practice Form")
 class TestFormPage:
     @pytest.mark.ui
     @pytest.mark.smoke
     @pytest.mark.positive
-    @allure.story("Проверка формы")
-    @allure.title("Проверка формы")
-    def test_form(self, driver):
+    @allure.story("Заполнение формы регистрации")
+    @allure.title("Проверка успешного заполнения формы регистрации")
+    def test_form(self, driver) -> None:
         form_page = FormPage(driver, BASE_URL)
         form_page.open()
-        p = form_page.fill_form_fields()
+        person = form_page.fill_form_fields(rf"input/img/test_file.txt")
         result = form_page.form_result()
 
-        with allure.step("Проверка заполнения формы"):
-            assert [p.firstname + " " + p.lastname, p.email] == [result[0], result[1]], "Форма не заполнена"
+        with allure.step("Проверка заполненных данных формы"):
+            assert [f"{person.firstname} {person.lastname}", person.email] == [
+                result[0],
+                result[1],
+            ], f"Данные формы заполнены некорректно: ожидалось={[person.firstname + ' ' + person.lastname, person.email]!r}, получено={result[:2]!r}"

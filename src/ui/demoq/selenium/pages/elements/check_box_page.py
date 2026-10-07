@@ -9,8 +9,6 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 class CheckBoxPage(BasePage):
     def __switch_open(self) -> None:
-        """Открываем все Check Box"""
-
         while True:
             try:
                 close_switches = self.elements_are_visible(CheckBoxLocators.SWITCH_CLOSE)

@@ -1,6 +1,4 @@
 import allure
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.wait import WebDriverWait
 
 from src.ui.demoq.selenium.locators.elements.links_locators import LinksLocators
 from src.ui.demoq.selenium.modules.elements.links import Links
@@ -8,19 +6,20 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class LinksPage(BasePage):
-    @allure.step("Открытие новой вкладки")
+    @allure.step("Открыть ссылку в новой вкладке: {select_links}")
     def open_new_tab(self, select_links: Links) -> str:
-        old_handles = self.driver.window_handles
-
         match select_links:
             case Links.SIMPLE_LINK_LINK:
-                self.element_is_visible(LinksLocators.SIMPLE_LINK_LINK).click()
-            case Links.DYNAMIC_LINK_LINK:
-                self.element_is_visible(LinksLocators.DYNAMIC_LINK_LINK).click()
+                self.element_is_clickable(
+                    LinksLocators.SIMPLE_LINK_LINK
+                ).click()
 
-        WebDriverWait(self.driver, 10).until(ec.new_window_is_opened(old_handles))
-        new_handle = [h for h in self.driver.window_handles if h not in old_handles][0]
-        self.driver.switch_to.window(new_handle)
+            case Links.DYNAMIC_LINK_LINK:
+                self.element_is_clickable(
+                    LinksLocators.DYNAMIC_LINK_LINK
+                ).click()
+
+        self.switch_to_new_window()
 
         return self.driver.title
 

@@ -9,20 +9,19 @@ from src.ui.demoq.selenium.pages.widgets.progress_bar_page import ProgressBarPag
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.PROGRESS_BAR.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-тесты")
 @allure.suite("DemoQA")
 @allure.feature("Страница Progress Bar")
-class TestSliderPage:
+class TestProgressBarPage:
     @pytest.mark.ui
     @pytest.mark.smoke
     @pytest.mark.positive
-    @allure.story("Проверка виджета-аккордеона")
-    @allure.feature("Date Picker Page")
-    @allure.title("Check changed progress bar")
+    @allure.story("Проверка виджета Progress Bar")
+    @allure.title("Проверка изменения значения Progress Bar")
     def test_progress_bar(self, driver):
-        progress_bar = ProgressBarPage(driver, BASE_URL)
-        progress_bar.open()
-        before, after = progress_bar.change_progress_bar_value()
+        progress_bar_page = ProgressBarPage(driver, BASE_URL)
+        progress_bar_page.open()
+        value_before, value_after = (progress_bar_page.change_progress_bar_value())
 
-        with allure.step("Проверка изменения состояния кнопок"):
-            assert before != after, "the progress bar value has not been changed"
+        with allure.step("Проверка изменения значения Progress Bar"):
+            assert value_before != value_after, "Значение Progress Bar не изменилось"

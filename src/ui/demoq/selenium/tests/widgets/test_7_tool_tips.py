@@ -6,7 +6,10 @@ import pytest
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
 from src.ui.demoq.selenium.pages.widgets.tool_tips_page import ToolTipsPage
 
-BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.TOOL_TIPS.value}"
+BASE_URL = (
+    f'{os.environ.get("DEMOQA_HOST")}'
+    f"{EndpointsDemoq.TOOL_TIPS.value}"
+)
 
 
 @allure.parent_suite("UI-тесты")
@@ -16,22 +19,37 @@ class TestToolTips:
     @pytest.mark.ui
     @pytest.mark.smoke
     @pytest.mark.positive
+    @pytest.mark.parametrize(
+        "tooltip_type, expected_text",
+        [
+            pytest.param(
+                "button",
+                "You hovered over the Button",
+                id="button-tooltip",
+            ),
+            pytest.param(
+                "field",
+                "You hovered over the text field",
+                id="field-tooltip",
+            ),
+            pytest.param(
+                "contrary",
+                "You hovered over the Contrary",
+                id="contrary-tooltip",
+            ),
+            pytest.param(
+                "section",
+                "You hovered over the 1.10.32",
+                id="section-tooltip",
+            ),
+        ],
+    )
     @allure.story("Проверка всплывающих подсказок")
-    @allure.title("Проверка текста всплывающих подсказок")
-    def test_tool_tips(self, driver):
+    @allure.title("Проверка текста подсказки: {tooltip_type}")
+    def test_tooltip_text(self, driver, tooltip_type, expected_text):
         tool_tips_page = ToolTipsPage(driver, BASE_URL)
         tool_tips_page.open()
+        actual_text = tool_tips_page.get_tooltip_text_by_type(tooltip_type)
 
-        (
-            button_text,
-            field_text,
-            contrary_text,
-            section_text,
-        ) = tool_tips_page.check_tool_tips()
-
-        with allure.step("Проверка изменения состояния кнопок"):
-            # TODO Переписать на параметризацию
-            assert button_text == "You hovered over the Button", "Всплывающая подсказка над кнопкой отсутствует или содержит некорректный текст"
-            assert field_text == "You hovered over the text field", "Всплывающая подсказка над текстовым полем отсутствует или содержит некорректный текст"
-            assert contrary_text == "You hovered over the Contrary", "Всплывающая подсказка над элементом Contrary отсутствует или содержит некорректный текст"
-            assert section_text == "You hovered over the 1.10.32", "Всплывающая подсказка над элементом 1.10.32 отсутствует или содержит некорректный текст"
+        with allure.step(f"Проверка текста подсказки для элемента «{tooltip_type}»"):
+            assert actual_text == expected_text, f"Ожидался текст «{expected_text}», но получен «{actual_text}»"

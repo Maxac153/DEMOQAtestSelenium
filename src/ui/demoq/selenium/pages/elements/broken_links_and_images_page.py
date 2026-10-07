@@ -11,7 +11,8 @@ class BrokenLinksAndImagesPage(BasePage):
     @classmethod
     def _is_broken_image(cls, url: str) -> bool:
         try:
-            r = requests.get(url, timeout=10)
+            r = requests.get(url, timeout=5)
+
             return not (r.status_code == 200 and r.headers.get("Content-Type", "").startswith("image/"))
         except requests.RequestException:
             return True

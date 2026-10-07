@@ -1,9 +1,8 @@
 import random
+from typing import List
 
 import allure
-from selenium.webdriver import Keys
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.keys import Keys
 
 from src.ui.demoq.selenium.generator.generator import generated_color
 from src.ui.demoq.selenium.locators.widgets.auto_complete_locators import AutoCompleteLocators
@@ -11,8 +10,8 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class AutoCompletePage(BasePage):
-    @allure.step("fill multi autocomplete input")
-    def fill_input_multi(self):
+    @allure.step("Заполнить multi autocomplete случайными цветами")
+    def fill_input_multi(self) -> List[str]:
         colors = random.sample(next(generated_color()).color_name, k=random.randint(2, 5))
 
         for color in colors:
@@ -24,30 +23,26 @@ class AutoCompletePage(BasePage):
 
         return colors
 
-    @allure.step("remove value form multi autocomplete")
-    def remove_value_from_multi(self):
-        wait = WebDriverWait(self.driver, 10)
-        wait.until(ec.presence_of_element_located(AutoCompleteLocators.MULTI_VALUE))
-        count_value_before = len(self.elements_are_present(AutoCompleteLocators.MULTI_VALUE))
-        remove_buttons = self.elements_are_visible(AutoCompleteLocators.MULTI_VALUE_REMOVE)
+    @allure.step("Удалить первое значение из multi autocomplete")
+    def remove_value_from_multi(self) -> tuple[int, int]:
+        self.wait_element_present(AutoCompleteLocators.MULTI_VALUE)
+        count_before = len(self.wait_elements_present(AutoCompleteLocators.MULTI_VALUE))
+        remove_buttons = self.wait_elements_visible(AutoCompleteLocators.MULTI_VALUE_REMOVE)
         remove_buttons[0].click()
+        count_after = len(self.wait_elements_present(AutoCompleteLocators.MULTI_VALUE))
 
-        count_value_after = len(self.elements_are_present(AutoCompleteLocators.MULTI_VALUE))
+        return count_before, count_after
 
-        return count_value_before, count_value_after
+    @allure.step("Получить выбранные цвета из multi autocomplete")
+    def check_color_in_multi(self) -> List[str]:
+        self.wait_element_present(AutoCompleteLocators.MULTI_VALUE_LABEL)
+        labels = self.wait_elements_visible(AutoCompleteLocators.MULTI_VALUE_LABEL)
 
-    @allure.step("check colors in multi autocomplete")
-    def check_color_in_multi(self):
-        wait = WebDriverWait(self.driver, 10)
-        wait.until(ec.presence_of_element_located(AutoCompleteLocators.MULTI_VALUE_LABEL))
-
-        labels = self.elements_are_visible(AutoCompleteLocators.MULTI_VALUE_LABEL)
         return [label.text.strip() for label in labels]
 
-    @allure.step("fill single autocomplete input")
-    def fill_input_single(self):
+    @allure.step("Заполнить single autocomplete случайным цветом")
+    def fill_input_single(self) -> str:
         color = random.sample(next(generated_color()).color_name, k=1)[0]
-
         input_single = self.element_is_clickable(AutoCompleteLocators.SINGLE_INPUT)
         input_single.click()
         input_single.clear()
@@ -56,10 +51,8 @@ class AutoCompletePage(BasePage):
 
         return color
 
-    @allure.step("check color in single autocomplete")
-    def check_color_in_single(self):
-        wait = WebDriverWait(self.driver, 10)
-        single_value = wait.until(
-            ec.visibility_of_element_located(AutoCompleteLocators.SINGLE_VALUE)
-        )
+    @allure.step("Получить выбранный цвет из single autocomplete")
+    def get_color_in_single(self) -> str:
+        single_value = self.wait_element_visible(AutoCompleteLocators.SINGLE_VALUE)
+
         return single_value.text.strip()

@@ -10,21 +10,61 @@ from src.ui.demoq.selenium.pages.elements.dynamic_properties_page import Dynamic
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.DYNAMIC_PROPERTIES.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-тесты")
 @allure.suite("DemoQA")
 @allure.feature("Страница Dynamic Properties")
-class TestsDynamicProperties:
+class TestDynamicProperties:
     @pytest.mark.ui
     @pytest.mark.smoke
     @pytest.mark.positive
-    @allure.story("Проверка выбора Dynamic Properties")
-    @allure.title("Проверка Dynamic Properties, изменение состояние button")
-    def test_dynamic_properties(self, driver: WebDriver) -> None:
+    @allure.story("Проверка активации кнопки")
+    @allure.title("Проверка активации кнопки через 5 секунд")
+    def test_button_becomes_enabled(self, driver: WebDriver) -> None:
         dynamic_properties_page = DynamicPropertiesPage(driver, BASE_URL)
         dynamic_properties_page.open()
-        button_enable, button_color_change, button_visible = dynamic_properties_page.button_click()
+        is_enabled = dynamic_properties_page.is_enable_button_enabled()
 
-        with allure.step("Проверка изменения состояния кнопок"):
-            assert button_enable == True
-            assert button_color_change == "mt-4 text-danger btn btn-primary"
-            assert button_visible == "Visible After 5 Seconds"
+        with allure.step("Проверка активности кнопки"):
+            assert is_enabled, (
+                "Кнопка «Enable After 5 Seconds» должна быть активной"
+            )
+
+    @pytest.mark.ui
+    @pytest.mark.smoke
+    @pytest.mark.positive
+    @allure.story("Проверка изменения цвета кнопки")
+    @allure.title("Проверка изменения цвета кнопки")
+    def test_button_color_changes(self, driver: WebDriver) -> None:
+        dynamic_properties_page = DynamicPropertiesPage(driver, BASE_URL)
+        dynamic_properties_page.open()
+
+        button_class = (
+            dynamic_properties_page.get_color_change_button_class()
+        )
+
+        expected_class = "mt-4 text-danger btn btn-primary"
+
+        with allure.step("Проверка CSS-классов кнопки"):
+            assert button_class == expected_class, (
+                "CSS-классы кнопки не соответствуют ожидаемым. "
+                f"Фактические CSS-классы: {button_class!r}"
+            )
+
+    @pytest.mark.ui
+    @pytest.mark.smoke
+    @pytest.mark.positive
+    @allure.story("Проверка отображения кнопки")
+    @allure.title("Проверка отображения кнопки через 5 секунд")
+    def test_button_becomes_visible(self, driver: WebDriver) -> None:
+        dynamic_properties_page = DynamicPropertiesPage(driver, BASE_URL)
+        dynamic_properties_page.open()
+
+        button_text = (
+            dynamic_properties_page.get_visible_button_text()
+        )
+
+        with allure.step("Проверка текста отображаемой кнопки"):
+            assert button_text == "Visible After 5 Seconds", (
+                "Кнопка должна стать видимой через 5 секунд. "
+                f"Фактический текст кнопки: {button_text!r}"
+            )

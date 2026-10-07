@@ -7,7 +7,7 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class DatePickerPage(BasePage):
-    @allure.step("change date")
+    @allure.step("Открыть 'Date Picker' и выбрать случайную дату")
     def select_date(self):
         date = next(generated_date())
         input_date = self.element_is_visible(DatePickerLocators.DATE_INPUT)
@@ -20,11 +20,12 @@ class DatePickerPage(BasePage):
 
         return value_date_before, value_date_after
 
-    @allure.step("change select date and time")
+    @allure.step("Открыть 'Date And Time Picker' и выбрать случайные дату и время")
     def select_date_and_time(self):
         date = next(generated_date())
         input_date = self.element_is_visible(DatePickerLocators.DATE_AND_TIME_INPUT)
         value_date_before = input_date.get_attribute("value")
+
         input_date.click()
         self.element_is_clickable(DatePickerLocators.DATE_AND_TIME_MONTH).click()
         self.set_date_item_from_list(DatePickerLocators.DATE_AND_TIME_MONTH_LIST, date.month)
@@ -37,12 +38,12 @@ class DatePickerPage(BasePage):
 
         return value_date_before, value_date_after
 
-    @allure.step("select date by text")
+    @allure.step("Выбрать значение в выпадающем списке по видимому тексту")
     def set_date_by_text(self, element, value):
         select = Select(self.element_is_present(element))
         select.select_by_visible_text(value)
 
-    @allure.step("select date item form list")
+    @allure.step("Выбрать значение из списка по тексту")
     def set_date_item_from_list(self, elements, value):
         item_list = self.elements_are_present(elements)
         for item in item_list:

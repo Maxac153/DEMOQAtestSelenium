@@ -17,8 +17,7 @@ class TestSortablePage:
     @pytest.mark.smoke
     @pytest.mark.positive
     @allure.story("Проверка виджета-аккордеона")
-    @allure.feature("Date Picker Page")
-    @allure.title("Check changed sortable list and grid")
+    @allure.title("Проверить измененный сортируемый список и сетку")
     def test_sortable(self, driver):
         sortable_page = SortablePage(driver, BASE_URL)
         sortable_page.open()
@@ -26,5 +25,5 @@ class TestSortablePage:
         grid_before, grid_after = sortable_page.change_grid_order()
 
         with allure.step("Проверка изменения состояния кнопок"):
-            assert list_before != list_after, "the order of the list has not been changed"
-            assert grid_before != grid_after, "the order of the grid has not been changed"
+            assert list_before != list_after, "Порядок списка не был изменен"
+            assert grid_before != grid_after, "Порядок списка не был изменен"

@@ -6,7 +6,9 @@ class CheckBoxLocators:
     SWITCH_CLOSE = (By.XPATH, "//span[@class='rc-tree-switcher rc-tree-switcher_close']")
     CHECK_BOX = (By.XPATH, "//span[@class='rc-tree-checkbox']")
     CHECK_BOX_ACTIVE = (
-    By.XPATH, "//span[contains(@class, 'rc-tree-checkbox-checked')]/following-sibling::span/span[2]")
+        By.XPATH,
+        "//span[contains(@class, 'rc-tree-checkbox-checked')]/following-sibling::span/span[2]"
+    )
     RESULT = (By.XPATH, "//div[@id='result']")
 
     # Select Name Check Box

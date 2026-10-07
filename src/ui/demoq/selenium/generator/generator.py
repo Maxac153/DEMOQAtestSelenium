@@ -35,7 +35,19 @@ def generated_file(file_path: str):
 
 def generated_color():
     yield Color(
-        color_name=["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"]
+        color_name=[
+            "Red",
+            "Blue",
+            "Green",
+            "Yellow",
+            "Purple",
+            "Black",
+            "White",
+            "Voilet",
+            "Indigo",
+            "Magenta",
+            "Aqua"
+        ]
     )
 
 

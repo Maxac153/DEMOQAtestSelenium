@@ -7,8 +7,6 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 class FramesPage(BasePage):
     def _get_frame_data(self, frame_element: WebElement) -> list[str]:
-        """Получение данных фрейма: текст заголовка, ширина, высота."""
-
         width = frame_element.get_attribute("width")
         height = frame_element.get_attribute("height")
 

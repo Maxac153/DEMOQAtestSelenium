@@ -40,7 +40,13 @@ class TestsButtons:
             )
         ]
     )
-    def test_check_box(self, driver: WebDriver, test_case_name: str, select_button: Button, expected_result: str):
+    def test_check_box(
+            self,
+            driver: WebDriver,
+            test_case_name: str,
+            select_button: Button,
+            expected_result: str
+    ):
         button_page = ButtonPage(driver, BASE_URL)
         button_page.open()
         result = button_page.button_click(select_button)

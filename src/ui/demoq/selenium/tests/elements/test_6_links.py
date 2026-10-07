@@ -66,7 +66,13 @@ class TestsButton:
             ("Проверка нажатия на Links (INVALID_URL_LINK)", Links.INVALID_URL_LINK, Links.INVALID_URL_LINK.value)
         ]
     )
-    def test_check_links(self, driver: WebDriver, test_case_name: str, select_links: Links, expected_result: str):
+    def test_check_links(
+            self,
+            driver: WebDriver,
+            test_case_name: str,
+            select_links: Links,
+            expected_result: str
+    ):
         links_page = LinksPage(driver, BASE_URL)
         links_page.open()
         result = links_page.click_links(select_links)

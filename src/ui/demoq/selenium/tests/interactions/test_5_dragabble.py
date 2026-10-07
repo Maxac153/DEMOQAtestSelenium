@@ -9,15 +9,15 @@ from src.ui.demoq.selenium.pages.interactions.draggable_page import DraggablePag
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.DRAGABBLE.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-тесты")
 @allure.suite("DemoQA")
-@allure.feature("Страница Droppable")
+@allure.feature("Страница Draggable")
 class TestDraggablePage:
     @pytest.mark.ui
     @pytest.mark.smoke
     @pytest.mark.positive
-    @allure.story("Проверка виджета-аккордеона")
-    @allure.title("Check simple draggable")
+    @allure.story("Простое перетаскивание элемента")
+    @allure.title("Проверка простого перетаскивания элемента")
     def test_simple_draggable(self, driver):
         draggable_page = DraggablePage(driver, BASE_URL)
         draggable_page.open()
@@ -29,8 +29,8 @@ class TestDraggablePage:
     @pytest.mark.ui
     @pytest.mark.smoke
     @pytest.mark.positive
-    @allure.story("Проверка виджета-аккордеона")
-    @allure.title("Check axis restricted draggable")
+    @allure.story("Перетаскивание элемента по заданной оси")
+    @allure.title("Проверка ограничения перетаскивания по горизонтальной и вертикальной оси")
     def test_axis_restricted_draggable(self, driver):
         draggable_page = DraggablePage(driver, BASE_URL)
         draggable_page.open()
@@ -39,10 +39,10 @@ class TestDraggablePage:
 
         with allure.step("Проверка изменения состояния кнопок"):
             assert top_x[0][0] == top_x[1][0] and int(
-                top_x[1][0]) == 0, "box position has not changed or there has been a shift in the y-axis"
+                top_x[1][0]) == 0, "Положение коробки не изменилось или произошло смещение y-axis"
             assert left_x[0][0] != left_x[1][0] and int(
-                left_x[1][0]) != 0, "box position has not changed or there has been a shift in the y-axis"
+                left_x[1][0]) != 0, "Положение коробки не изменилось или произошло смещение y-axis"
             assert top_y[0][0] != top_y[1][0] and int(
-                top_y[1][0]) != 0, "box position has not changed or there has been a shift in the x-axis"
+                top_y[1][0]) != 0, "Положение коробки не изменилось или произошло смещение x-axis"
             assert left_y[0][0] == left_y[1][0] and int(
-                left_y[1][0]) == 0, "box position has not changed or there has been a shift in the x-axis"
+                left_y[1][0]) == 0, "Положение коробки не изменилось или произошло смещение x-axis"

@@ -12,24 +12,28 @@ BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.TABS.value}"
 @allure.parent_suite("UI-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Tabs")
-class TestSliderPage:
+class TestTabsPage:
     @pytest.mark.ui
     @pytest.mark.smoke
     @pytest.mark.positive
-    @allure.story("Проверка виджета-аккордеона")
-    @allure.feature("Date Picker Page")
-    @allure.title("Check switched tabs")
-    def test_tabs(self, driver):
+    @pytest.mark.parametrize(
+        "tab_name, expected_title",
+        [
+            pytest.param("what", "What", id="what"),
+            pytest.param("origin", "Origin", id="origin"),
+            pytest.param("use", "Use", id="use"),
+            pytest.param("more", "More", id="more"),
+        ],
+    )
+    @allure.story("Переключение вкладок")
+    @allure.title("Проверка вкладки «{expected_title}»")
+    def test_tabs(self, driver, tab_name, expected_title):
         tabs = TabsPage(driver, BASE_URL)
         tabs.open()
-        what_button, what_content = tabs.check_tabs("what")
-        origin_button, origin_content = tabs.check_tabs("origin")
-        use_button, use_content = tabs.check_tabs("use")
-        more_button, more_content = tabs.check_tabs("more")
+        actual_title, content_length = tabs.open_tab_and_get_content_length(tab_name)
 
-        with allure.step("Проверка изменения состояния кнопок"):
-            # TODO Переписать на параметризацию
-            assert what_button == "What" and what_content != 0, "Вкладка «what» не была нажата, или текст отсутствует"
-            assert origin_button == "Origin" and origin_content != 0, "Вкладка «origin» не была нажата, или текст отсутствует"
-            assert use_button == "Use" and use_content != 0, "Вкладка «use» не была нажата, или текст отсутствует"
-            assert more_button == "More" and what_content != 0, "Вкладка «more» не была нажата, или текст отсутствует"
+        with allure.step("Проверка названия вкладки"):
+            assert actual_title == expected_title, f"Ожидалось название «{expected_title}», получено «{actual_title}»"
+
+        with allure.step("Проверка наличия содержимого вкладки"):
+            assert content_length > 0, f"Содержимое вкладки «{tab_name}» отсутствует"

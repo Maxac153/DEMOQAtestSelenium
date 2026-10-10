@@ -81,5 +81,6 @@ class TestDroppablePage:
         not_will_after_move, not_will_after_revert = (droppable_page.drop_revert_draggable("not_will"))
 
         with allure.step("Проверка возврата элементов после перетаскивания"):
-            assert will_after_move != will_after_revert, "Элемент с настройкой возврата должен вернуться в исходное состояние"
-            assert not_will_after_move == not_will_after_revert, "Элемент без настройки возврата не должен изменять состояние после завершения перетаскивания"
+            assert will_after_move == will_after_revert, "Элемент с настройкой возврата должен вернуться в исходное состояние"
+            assert not_will_after_move != "0px", "Элемент без настройки возврата не должен изменять состояние после завершения перетаскивания"
+            assert not_will_after_revert != "0px", "Элемент без настройки возврата не должен изменять состояние после завершения перетаскивания"

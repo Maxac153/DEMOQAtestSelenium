@@ -1,7 +1,7 @@
 import allure
 from selenium.webdriver.support.select import Select
 
-from src.ui.demoq.selenium.generator.generator import generated_date
+from src.ui.demoq.__common.generator.generator import generated_date
 from src.ui.demoq.selenium.locators.widgets.date_picker_locators import DatePickerLocators
 from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 

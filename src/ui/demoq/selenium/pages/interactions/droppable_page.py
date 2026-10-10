@@ -1,3 +1,5 @@
+import time
+
 import allure
 
 from src.ui.demoq.selenium.locators.interactions.droppable_locators import DroppableLocators
@@ -10,6 +12,8 @@ class DroppablePage(BasePage):
         self.element_is_visible(DroppableLocators().SIMPLE_TAB).click()
         drag_div = self.element_is_visible(DroppableLocators().DRAG_ME_SIMPLE)
         drop_div = self.element_is_visible(DroppableLocators().DROP_HERE_SIMPLE)
+        #TODO переделать на неявное ожидание, почему он не дожидается изменения значения
+        time.sleep(1)
         self.action_drag_and_drop_to_element(drag_div, drop_div)
 
         return drop_div.text
@@ -20,10 +24,8 @@ class DroppablePage(BasePage):
         acceptable_div = self.element_is_visible(DroppableLocators().ACCEPTABLE)
         not_acceptable_div = self.element_is_visible(DroppableLocators().NOT_ACCEPTABLE)
         drop_div = self.element_is_visible(DroppableLocators().DROP_HERE_ACCEPT)
-
         self.action_drag_and_drop_to_element(not_acceptable_div, drop_div)
         drop_text_not_accept = drop_div.text
-
         self.action_drag_and_drop_to_element(acceptable_div, drop_div)
         drop_text_accept = drop_div.text
 
@@ -47,25 +49,40 @@ class DroppablePage(BasePage):
         return text_not_greedy_box, text_not_greedy_inner_box, text_greedy_box, text_greedy_inner_box
 
     @allure.step("Открыть вкладку 'Revert Draggable' и перетащить элемент в зону сброса")
-    def drop_revert_draggable(self, type_drag):
+    def drop_revert_draggable(self, type_drag: str) -> tuple[str, str]:
         drags = {
-            "will": {
-                "revert": DroppableLocators().WILL_REVERT,
-            },
-            "not_will": {
-                "revert": DroppableLocators().NOT_REVERT
-            },
+            "will": DroppableLocators().WILL_REVERT,
+            "not_will": DroppableLocators().NOT_REVERT,
         }
+
         self.element_is_visible(DroppableLocators().REVERT_TAB).click()
-        revert = self.element_is_visible(drags[type_drag]["revert"])
+
+        revert = self.element_is_visible(drags[type_drag])
         drop_div = self.element_is_visible(DroppableLocators().DROP_HERE_REVERT)
 
         self.action_drag_and_drop_to_element(revert, drop_div)
-        position_after_move = revert.get_attribute("style")
-        position_after_revert = self.wait_attribute_change(
-            element=revert,
-            attribute="style",
-            old_value=position_after_move,
-        )
 
-        return position_after_move, position_after_revert
+        if type_drag == "will":
+            left = self.wait_css_property_equals(
+                element=revert,
+                property_name="left",
+                expected_value="0px",
+            )
+            top = self.wait_css_property_equals(
+                element=revert,
+                property_name="top",
+                expected_value="0px",
+            )
+        else:
+            left = self.wait_css_property_not_equals(
+                element=revert,
+                property_name="left",
+                unexpected_value="0px",
+            )
+            top = self.wait_css_property_not_equals(
+                element=revert,
+                property_name="top",
+                unexpected_value="0px",
+            )
+
+        return left, top

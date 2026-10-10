@@ -4,7 +4,7 @@ from typing import List
 import allure
 from selenium.webdriver.common.keys import Keys
 
-from src.ui.demoq.selenium.generator.generator import generated_color
+from src.ui.demoq.__common.generator.generator import generated_color
 from src.ui.demoq.selenium.locators.widgets.auto_complete_locators import AutoCompleteLocators
 from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 

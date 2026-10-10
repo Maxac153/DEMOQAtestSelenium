@@ -1,4 +1,6 @@
 import random
+import tempfile
+from pathlib import Path
 
 from faker import Faker
 
@@ -27,10 +29,13 @@ def generated_person():
 
 
 def generated_file(file_path: str):
-    file = open(file_path, "w+")
-    file.write(f"Hello World{random.randint(0, 999)}")
-    file.close()
-    return file.name, file_path
+    full_path = Path(file_path).resolve()
+    full_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(full_path, "w") as file:
+        file.write(f"Hello World{random.randint(0, 999)}")
+
+    return file.name, str(full_path)
 
 
 def generated_color():

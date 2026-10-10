@@ -3,7 +3,7 @@ import os
 
 import allure
 
-from src.ui.demoq.selenium.generator.generator import generated_file
+from src.ui.demoq.__common.generator.generator import generated_file
 from src.ui.demoq.selenium.locators.elements.upload_and_download_locators import UploadAndDownloadLocators
 from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
@@ -11,7 +11,7 @@ from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 class UploadAndDownloadPage(BasePage):
     @allure.step("Загрузить картинку")
     def upload_file(self, file_path: str):
-        file_name, path = generated_file(os.path.abspath(file_path))
+        file_name, path = generated_file(file_path)
         self.element_is_visible(UploadAndDownloadLocators().UPLOAD_FILE).send_keys(path)
         os.remove(path)
         text = self.element_is_visible(UploadAndDownloadLocators().UPLOADED_RESULT).text

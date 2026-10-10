@@ -1,7 +1,7 @@
 import allure
 from selenium.webdriver import Keys
 
-from src.ui.demoq.selenium.generator.generator import generated_person, generated_file
+from src.ui.demoq.__common.generator.generator import generated_person, generated_file
 from src.ui.demoq.selenium.locators.form.form_page_locators import FormLocators
 from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
@@ -25,7 +25,6 @@ class FormPage(BasePage):
         self.element_is_visible(FormLocators().STATE_INPUT).send_keys(Keys.RETURN)
         self.element_is_visible(FormLocators().SELECT_STATE).click()
         self.element_is_visible(FormLocators().CITY_INPUT).send_keys(Keys.RETURN)
-        self.element_is_visible(FormLocators().SUBMIT).click()
 
         return person
 

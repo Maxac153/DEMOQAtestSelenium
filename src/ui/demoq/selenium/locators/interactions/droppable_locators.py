@@ -4,14 +4,14 @@ from selenium.webdriver.common.by import By
 class DroppableLocators:
     # Simple
     SIMPLE_TAB = (By.CSS_SELECTOR, "button[id='droppableExample-tab-simple']")
-    DRAG_ME_SIMPLE = (By.CSS_SELECTOR, "div[id='draggable']")
+    DRAG_ME_SIMPLE = (By.XPATH, "//div[@id='draggable']")
     DROP_HERE_SIMPLE = (By.CSS_SELECTOR, "#simpleDropContainer #droppable")
 
     # Accept
     ACCEPT_TAB = (By.CSS_SELECTOR, "button[id='droppableExample-tab-accept']")
     ACCEPTABLE = (By.CSS_SELECTOR, "div[id='acceptable']")
-    NOT_ACCEPTABLE = (By.CSS_SELECTOR, "div[id='notAcceptable']")
-    DROP_HERE_ACCEPT = (By.CSS_SELECTOR, "#acceptDropContainer #droppable")
+    NOT_ACCEPTABLE = (By.XPATH, "//div[text()='Not Acceptable']")
+    DROP_HERE_ACCEPT = (By.XPATH, "//div[contains(@class, 'accept-drop-container')]//div[contains(@class, 'drop-box') and contains(@class, 'ui-droppable')]")
 
     # Prevent Propogation
     PREVENT_TAB = (By.CSS_SELECTOR, "button[id='droppableExample-tab-preventPropogation']")

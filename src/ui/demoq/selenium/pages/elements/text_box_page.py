@@ -1,7 +1,7 @@
 import allure
 
+from src.ui.demoq.__common.models.elements.text_box import TextBox
 from src.ui.demoq.selenium.locators.elements.text_box_page_locators import TextBoxPageLocators
-from src.ui.demoq.selenium.modules.elements.text_box import TextBox
 from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 

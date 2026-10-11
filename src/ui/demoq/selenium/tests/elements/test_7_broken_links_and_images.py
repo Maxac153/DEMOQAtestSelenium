@@ -5,8 +5,8 @@ import pytest
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
-from src.ui.demoq.selenium.modules.elements.broken_images import BrokenImages
-from src.ui.demoq.selenium.modules.elements.broken_links import BrokenLinks
+from src.ui.demoq.__common.models.elements.broken_images import BrokenImages
+from src.ui.demoq.__common.models.elements.broken_links import BrokenLinks
 from src.ui.demoq.selenium.pages.elements.broken_links_and_images_page import BrokenLinksAndImagesPage
 
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.BROKEN_LINKS.value}"

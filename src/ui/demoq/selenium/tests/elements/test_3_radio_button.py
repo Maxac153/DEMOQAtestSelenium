@@ -5,7 +5,7 @@ import pytest
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
-from src.ui.demoq.selenium.modules.elements.radio_button import RadioButton
+from src.ui.demoq.__common.models.elements.radio_button import RadioButton
 from src.ui.demoq.selenium.pages.elements.radio_button_page import RadioButtonPage
 
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.RADIO_BUTTON.value}"

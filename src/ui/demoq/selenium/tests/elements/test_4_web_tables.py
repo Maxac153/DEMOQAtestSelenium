@@ -7,7 +7,7 @@ from faker import Faker
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
-from src.ui.demoq.selenium.modules.elements.person import Person
+from src.ui.demoq.__common.models.elements.person import Person
 from src.ui.demoq.selenium.pages.elements.web_table_page import WebTablePage
 
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.WEB_TABLES.value}"

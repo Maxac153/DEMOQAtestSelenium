@@ -1,7 +1,7 @@
 import allure
 
+from src.ui.demoq.__common.models.elements.links import Links
 from src.ui.demoq.selenium.locators.elements.links_locators import LinksLocators
-from src.ui.demoq.selenium.modules.elements.links import Links
 from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 

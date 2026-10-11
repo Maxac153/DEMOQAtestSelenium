@@ -6,7 +6,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 
 from conftest import FAKE
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
-from src.ui.demoq.selenium.modules.elements.text_box import TextBox
+from src.ui.demoq.__common.models.elements.text_box import TextBox
 from src.ui.demoq.selenium.pages.elements.text_box_page import TextBoxPage
 
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.TEXT_BOX.value}"

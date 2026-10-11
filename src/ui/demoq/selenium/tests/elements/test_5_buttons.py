@@ -5,7 +5,7 @@ import pytest
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
-from src.ui.demoq.selenium.modules.elements.button import Button
+from src.ui.demoq.__common.models.elements.button import Button
 from src.ui.demoq.selenium.pages.elements.button_page import ButtonPage
 
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.BUTTONS.value}"

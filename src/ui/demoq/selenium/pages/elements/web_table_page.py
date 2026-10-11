@@ -1,8 +1,8 @@
 import allure
 from selenium.webdriver.common.by import By
 
+from src.ui.demoq.__common.models.elements.person import Person
 from src.ui.demoq.selenium.locators.elements.web_table_locators import WebTableLocators
-from src.ui.demoq.selenium.modules.elements.person import Person
 from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 

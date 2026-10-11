@@ -60,6 +60,6 @@ allure serve output/allure-results
 9. Понять как делать диаграмму с запусками тестов в allure
 10. Дописать ui тесты book_store_application
 11. Дописать ui тесты [.py](src/ui/demoq/selenium/tests/widgets/test_9_select_menu.py)
-12. Написать тесты для playwright
+~~12. Написать тесты для playwright, 3 штуки~~
 13. Изучить флаки тесты в python
-14. Как понять сколько потоков выделять
+14. Как понять сколько потоков выделять на параллельный запуск

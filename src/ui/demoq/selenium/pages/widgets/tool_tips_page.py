@@ -1,8 +1,6 @@
 import allure
 
-from src.ui.demoq.selenium.locators.widgets.tool_tips_locators import (
-    ToolTipsLocators,
-)
+from src.ui.demoq.selenium.locators.widgets.tool_tips_locators import ToolTipsLocators
 from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 

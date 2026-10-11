@@ -1,7 +1,7 @@
 import allure
 
+from src.ui.demoq.__common.models.elements.radio_button import RadioButton
 from src.ui.demoq.selenium.locators.elements.radio_button_locators import RadioButtonLocators
-from src.ui.demoq.selenium.modules.elements.radio_button import RadioButton
 from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 

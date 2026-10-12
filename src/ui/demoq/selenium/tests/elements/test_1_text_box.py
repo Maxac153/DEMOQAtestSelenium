@@ -6,25 +6,11 @@ from faker import Faker
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
+from src.ui.demoq.__common.generator.generator import create_text_box
 from src.ui.demoq.__common.models.elements.text_box import TextBox
 from src.ui.demoq.selenium.pages.elements.text_box_page import TextBoxPage
 
 BASE_URL = f"{os.environ.get('DEMOQA_HOST')}{EndpointsDemoq.TEXT_BOX.value}"
-
-
-def _create_text_box(fake: Faker, omit: tuple[str, ...] = (), **overrides: str) -> TextBox:
-    """Создаёт данные формы. Поля из omit не заполняются."""
-    fields = {
-        "full_name": fake.name(),
-        "email": fake.email(),
-        "current_address": fake.address().replace("\n", ", "),
-        "permanent_address": fake.address().replace("\n", ", "),
-    }
-    fields.update(overrides)
-    for field in omit:
-        fields.pop(field)
-
-    return TextBox(**fields)
 
 
 @allure.parent_suite("UI-test")
@@ -50,7 +36,7 @@ class TestsTextBox:
         ],
     )
     def test_text_box(self, driver: WebDriver, fake: Faker, omit: tuple[str, ...]) -> None:
-        data = _create_text_box(fake, omit=omit)
+        data = create_text_box(fake, omit=omit)
 
         text_box_page = TextBoxPage(driver, BASE_URL)
         text_box_page.open()
@@ -87,7 +73,7 @@ class TestsTextBox:
         ],
     )
     def test_text_box_email(self, driver: WebDriver, fake: Faker, invalid_email: str) -> None:
-        data = _create_text_box(fake, email=invalid_email)
+        data = create_text_box(fake, email=invalid_email)
 
         text_box_page = TextBoxPage(driver, BASE_URL)
         text_box_page.open()

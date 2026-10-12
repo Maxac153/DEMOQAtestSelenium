@@ -2,75 +2,42 @@ import os
 
 import allure
 import pytest
+from faker import Faker
 from playwright.sync_api import Page
 
-from conftest import FAKE
 from src.ui.demoq.__common.endpoints.endpoints_demoq import EndpointsDemoq
+from src.ui.demoq.__common.generator.generator import create_text_box
 from src.ui.demoq.__common.models.elements.text_box import TextBox
 from src.ui.demoq.playwright.pages.elements.text_box_page import TextBoxPage
 
-BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.TEXT_BOX.value}"
+BASE_URL = f"{os.environ.get('DEMOQA_HOST')}{EndpointsDemoq.TEXT_BOX.value}"
 
 
 @allure.parent_suite("UI-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Text Box")
 class TestsTextBox:
-    EMAIL = FAKE.email()
-
     @pytest.mark.ui
     @pytest.mark.smoke
     @pytest.mark.positive
     @allure.story("Проверка отправки формы")
     @allure.title("Тест TextBox с параметризацией, позитивные проверки")
     @pytest.mark.parametrize(
-        "test_case_name,data",
+        "omit",
         [
-            (
-                    "1. Корректные данные",
-                    TextBox(
-                        full_name=FAKE.name(),
-                        email=EMAIL,
-                        current_address=FAKE.address(),
-                        permanent_address=FAKE.address(),
-                    ),
-            ),
-            (
-                    "2. Пропуск поля name",
-                    TextBox(
-                        email=FAKE.email(),
-                        current_address=FAKE.address(),
-                        permanent_address=FAKE.address(),
-                    ),
-            ),
-            (
-                    "3. Пропуск поля email",
-                    TextBox(
-                        full_name=FAKE.name(),
-                        current_address=FAKE.address(),
-                        permanent_address=FAKE.address(),
-                    ),
-            ),
-            (
-                    "4. Пропуск поля current_address",
-                    TextBox(
-                        full_name=FAKE.name(),
-                        email=FAKE.email(),
-                        permanent_address=FAKE.address(),
-                    ),
-            ),
-            (
-                    "5. Пропуск всех полей",
-                    TextBox(),
+            pytest.param((), id="1. Корректные данные"),
+            pytest.param(("full_name",), id="2. Пропуск поля name"),
+            pytest.param(("email",), id="3. Пропуск поля email"),
+            pytest.param(("current_address",), id="4. Пропуск поля current_address"),
+            pytest.param(
+                ("full_name", "email", "current_address", "permanent_address"),
+                id="5. Пропуск всех полей",
             ),
         ],
     )
-    def test_text_box(
-            self,
-            page: Page,
-            test_case_name: str,
-            data: TextBox,
-    ) -> None:
+    def test_text_box(self, page: Page, fake: Faker, omit: tuple[str, ...]) -> None:
+        data = create_text_box(fake, omit=omit)
+
         text_box_page = TextBoxPage(page, BASE_URL)
         text_box_page.open()
         text_box_page.submit_form(data)
@@ -80,14 +47,10 @@ class TestsTextBox:
             full_name=f"Name:{data.full_name}" if data.full_name else "",
             email=f"Email:{data.email}" if data.email else "",
             current_address=(
-                f"Current Address :{data.current_address}"
-                if data.current_address
-                else ""
+                f"Current Address :{data.current_address}" if data.current_address else ""
             ),
             permanent_address=(
-                f"Permananet Address :{data.permanent_address}"
-                if data.permanent_address
-                else ""
+                f"Permananet Address :{data.permanent_address}" if data.permanent_address else ""
             ),
         )
 
@@ -102,34 +65,15 @@ class TestsTextBox:
     @allure.story("Проверка отправки формы")
     @allure.title("Тест TextBox с параметризацией, негативные проверки")
     @pytest.mark.parametrize(
-        "test_case_name,data",
+        "invalid_email",
         [
-            (
-                    "1. Некорректный email, пропуск собаки",
-                    TextBox(
-                        full_name=FAKE.name(),
-                        email="user1example.com",
-                        current_address=FAKE.address(),
-                        permanent_address=FAKE.address(),
-                    ),
-            ),
-            (
-                    "2. Некорректный email, пропуск точки",
-                    TextBox(
-                        full_name=FAKE.name(),
-                        email="user2@examplecom",
-                        current_address=FAKE.address(),
-                        permanent_address=FAKE.address(),
-                    ),
-            ),
+            pytest.param("user1example.com", id="1. Некорректный email, пропуск собаки"),
+            pytest.param("user2@examplecom", id="2. Некорректный email, пропуск точки"),
         ],
     )
-    def test_text_box_email(
-            self,
-            page: Page,
-            test_case_name: str,
-            data: TextBox,
-    ) -> None:
+    def test_text_box_email(self, page: Page, fake: Faker, invalid_email: str) -> None:
+        data = create_text_box(fake, email=invalid_email)
+
         text_box_page = TextBoxPage(page, BASE_URL)
         text_box_page.open()
         text_box_page.submit_form(data)

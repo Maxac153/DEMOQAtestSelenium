@@ -1,12 +1,12 @@
 import random
-import tempfile
 from pathlib import Path
 
 from faker import Faker
 
-from src.ui.demoq.selenium.modules.elements.person import Person
-from src.ui.demoq.selenium.modules.widgets.color import Color
-from src.ui.demoq.selenium.modules.widgets.date import Date
+from src.ui.demoq.__common.models.elements.person import Person
+from src.ui.demoq.__common.models.elements.text_box import TextBox
+from src.ui.demoq.__common.models.widgets.color import Color
+from src.ui.demoq.__common.models.widgets.date import Date
 
 faker_ru = Faker("ru_RU")
 fake_en = Faker("En")
@@ -63,3 +63,18 @@ def generated_date():
         day=fake_en.day_of_month(),
         time="12:00"
     )
+
+
+def create_text_box(fake: Faker, omit: tuple[str, ...] = (), **overrides: str) -> TextBox:
+    """Создаёт данные формы Text Box. Поля из omit не заполняются."""
+    fields = {
+        "full_name": fake.name(),
+        "email": fake.email(),
+        "current_address": fake.address().replace("\n", ", "),
+        "permanent_address": fake.address().replace("\n", ", "),
+    }
+    fields.update(overrides)
+    for field in omit:
+        fields.pop(field)
+
+    return TextBox(**fields)

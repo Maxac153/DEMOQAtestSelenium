@@ -1,4 +1,6 @@
+import json as jsonlib
 import os
+from typing import Any
 
 import allure
 import requests
@@ -7,7 +9,13 @@ from src.api.demoq.request.api.models import ApiResponse
 
 
 class DemoQaClient:
-    def __init__(self, base_url: str = os.environ.get("DEMOQA_HOST")):
+    def __init__(self, base_url: str | None = None):
+        base_url = base_url or os.environ.get("DEMOQA_HOST")
+        if not base_url:
+            raise ValueError(
+                "Не задан адрес API: передай base_url или установи переменную окружения DEMOQA_HOST"
+            )
+
         self.base_url = base_url.rstrip("/")
         self.session = requests.Session()
         self.session.headers.update(
@@ -22,16 +30,16 @@ class DemoQaClient:
             method: str,
             path: str,
             *,
-            json: dict[str, any] | None = None,
-            params: dict[str, any] | None = None,
+            json: dict[str, Any] | None = None,
+            params: dict[str, Any] | None = None,
             headers: dict[str, str] | None = None,
     ) -> ApiResponse:
         url = f"{self.base_url}{path}"
 
         with allure.step(f"{method} {url}"):
-            if json:
+            if json is not None:
                 allure.attach(
-                    str(json),
+                    jsonlib.dumps(json, ensure_ascii=False, indent=2),
                     name="Request body",
                     attachment_type=allure.attachment_type.JSON,
                 )
@@ -154,17 +162,12 @@ class DemoQaClient:
             },
         )
 
-    def delete_all_books(
-            self,
-            user_id: str,
-            token: str,
-    ) -> ApiResponse:
+    def delete_all_books(self, user_id: str, token: str) -> ApiResponse:
         return self._request(
             "DELETE",
-            f"/BookStore/v1/Books?UserId={user_id}",
-            headers={
-                "Authorization": f"Bearer {token}",
-            },
+            "/BookStore/v1/Books",
+            params={"UserId": user_id},
+            headers={"Authorization": f"Bearer {token}"},
         )
 
     def delete_user(self, user_id: str, token: str) -> ApiResponse:

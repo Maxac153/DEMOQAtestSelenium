@@ -1,16 +1,29 @@
 import os
 import platform
+import random
 import shutil
 
-import faker
+import allure
+import pytest
 from dotenv import find_dotenv, load_dotenv
+from faker import Faker
 
 env_file = find_dotenv(".env", raise_error_if_not_found=False)
 if env_file:
     load_dotenv(env_file)
 
-FAKE = faker.Faker(os.environ.get("FAKER_LOCALE", "ru_RU"))
-os.makedirs("output", exist_ok=True)
+
+@pytest.fixture(scope="session")
+def faker_seed() -> int:
+    return int(os.environ.get("FAKER_SEED", random.randrange(2 ** 32)))
+
+
+@pytest.fixture
+def fake(faker_seed: int, request) -> Faker:
+    fake = Faker(os.environ.get("FAKER_LOCALE", "ru_RU"))
+    fake.seed_instance(faker_seed)
+    allure.dynamic.parameter("faker_seed", faker_seed)
+    return fake
 
 
 def pytest_configure(config):

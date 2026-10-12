@@ -22,14 +22,9 @@ class WebTablePage(BasePage):
         return [person.firstname, person.lastname, str(person.age), person.email, str(person.salary), person.department]
 
     @allure.step("Получение всех пользователей")
-    def get_persons(self):
+    def get_persons(self) -> list[str]:
         people_list = self.elements_are_visible(WebTableLocators().FULL_PEOPLE_LIST)
-        data = []
-        # TODO Поправить на объект list[Person(...)]
-        for item in people_list:
-            data.append(item.text.splitlines())
-
-        return data
+        return [" ".join(item.text.splitlines()) for item in people_list]
 
     @allure.step("Поиск пользователя")
     def search_some_person(self, key_word):

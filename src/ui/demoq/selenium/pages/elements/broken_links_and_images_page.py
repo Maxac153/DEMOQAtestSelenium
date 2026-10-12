@@ -1,39 +1,56 @@
 import allure
-import requests
+from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support.ui import WebDriverWait
 
 from src.ui.demoq.__common.models.elements.broken_images import BrokenImages
 from src.ui.demoq.__common.models.elements.broken_links import BrokenLinks
-from src.ui.demoq.selenium.locators.elements.broken_links_and_images_locators import BrokenLinksAndImagesLinksLocators
+from src.ui.demoq.selenium.locators.elements.broken_links_and_images_locators import (
+    BrokenLinksAndImagesLinksLocators,
+)
 from src.ui.demoq.selenium.pages.__common.base_page import BasePage
 
 
 class BrokenLinksAndImagesPage(BasePage):
-    @classmethod
-    def _is_broken_image(cls, url: str) -> bool:
-        try:
-            r = requests.get(url, timeout=5)
+    @allure.step("Проверить загрузку изображения ({image})")
+    def select_image(self, image: BrokenImages, timeout: int = 10) -> bool:
+        """Дождаться завершения загрузки изображения и вернуть True, если оно загрузилось."""
+        locator = {
+            BrokenImages.VALID_IMAGE: BrokenLinksAndImagesLinksLocators.VALID_IMAGE,
+            BrokenImages.BROKEN_IMAGE: BrokenLinksAndImagesLinksLocators.BROKEN_IMAGE,
+        }[image]
 
-            return not (r.status_code == 200 and r.headers.get("Content-Type", "").startswith("image/"))
-        except requests.RequestException:
-            return True
+        image_element = self.element_is_visible(locator)
 
-    @allure.step("Нажатие на Links ({image})")
-    def select_image(self, image: BrokenImages) -> bool:
-        img = ""
-        match image:
-            case BrokenImages.VALID_IMAGE:
-                img = self.element_is_visible(BrokenLinksAndImagesLinksLocators.VALID_IMAGE)
-            case BrokenImages.BROKEN_IMAGE:
-                img = self.element_is_visible(BrokenLinksAndImagesLinksLocators.BROKEN_IMAGE)
+        self._wait_image_loading_finished(image_element, timeout)
 
-        return self.driver.execute_script("return arguments[0].naturalWidth > 0", img)
+        return self.driver.execute_script(
+            "return arguments[0].naturalWidth > 0;",
+            image_element,
+        )
 
-    @allure.step("Нажатие на Links ({select_links})")
+    def _wait_image_loading_finished(
+            self,
+            image: WebElement,
+            timeout: int = 10,
+    ) -> None:
+        """Ждёт, пока браузер завершит обработку изображения: success или error."""
+
+        def image_is_completed(driver: WebDriver) -> bool:
+            return driver.execute_script(
+                "return arguments[0].complete === true;",
+                image,
+            )
+
+        WebDriverWait(self.driver, timeout).until(image_is_completed)
+
+    @allure.step("Открыть ссылку в новой вкладке ({select_links})")
     def open_new_tab(self, select_links: BrokenLinks) -> str:
-        match select_links:
-            case BrokenLinks.VALID_LINK:
-                self.element_is_visible(BrokenLinksAndImagesLinksLocators.VALID_LINK).click()
-            case BrokenLinks.BROKEN_LINK:
-                self.element_is_visible(BrokenLinksAndImagesLinksLocators.BROKEN_LINK).click()
+        locator = {
+            BrokenLinks.VALID_LINK: BrokenLinksAndImagesLinksLocators.VALID_LINK,
+            BrokenLinks.BROKEN_LINK: BrokenLinksAndImagesLinksLocators.BROKEN_LINK,
+        }[select_links]
+
+        self.element_is_clickable(locator).click()
 
         return self.driver.title

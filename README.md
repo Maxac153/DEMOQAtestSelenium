@@ -1,65 +1,123 @@
-# DEMOQA test Selenium
+# DEMOQA Tests
 
-## Описание
+Автотесты для учебного сайта [DEMOQA](https://demoqa.com): UI (Selenium и Playwright) и API (`requests`). Отчёты строятся в Allure.
 
-Сайт для тестирования (<a href="https://demoqa.com">DEMOQA</a>).
+## Стек
 
-## Окружение
+- Python, [Poetry](https://python-poetry.org/)
+- pytest, pytest-xdist (параллельный запуск)
+- Selenium, Playwright
+- requests (API-клиент)
+- Allure Report
+- Faker (тестовые данные)
 
-Для того чтобы запустить тесты надо установить браузер chromium и установить веб драйвер:
+## Структура проекта
+
+```
+.
+├── src/
+│   ├── api/demoq/          # API-клиент и API-тесты
+│   └── ui/demoq/
+│       └── selenium/       # страницы, локаторы и UI-тесты на Selenium
+├── img/                    # картинки для README
+├── conftest.py             # общие фикстуры
+├── pytest.ini              # настройки pytest и маркеры
+└── pyproject.toml          # зависимости
+```
+
+## Быстрый старт
+
+### 1. Требования
+
+- Python 3.10+ (точную версию смотри в `pyproject.toml`)
+- Poetry
+- Браузер Google Chrome (драйвер Selenium скачивает сам)
+- Allure CLI для просмотра отчётов ([установка](https://allurereport.org/docs/install/))
+
+### 2. Установка зависимостей
+
+```bash
+poetry install
+poetry run playwright install chromium
+```
+
+Если Chrome не установлен (Linux, Debian/Ubuntu):
 
 ```bash
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-apt install -y ./google-chrome-stable_current_amd64.deb
+sudo apt install -y ./google-chrome-stable_current_amd64.deb
 ```
 
-## Состав проекта
+### 3. Переменные окружения
 
-- Папка (tests) с Python тестами
-- Папка (report) c отчётами
+| Переменная    | Описание                | Пример              |
+|---------------|-------------------------|---------------------|
+| `DEMOQA_HOST` | Адрес тестируемого сайта | `https://demoqa.com` |
 
-## Selenium и Api тесты
-
-Запуск тестов
-
-Описание параметров запуска:
-
-```textmate
-
-poetry run pytest -n <> --dist=loadfile -m smoke
-```
-
-Пример команды запуска:
+Linux / macOS:
 
 ```bash
+export DEMOQA_HOST=https://demoqa.com
+```
+
+Windows (PowerShell):
+
+```powershell
+$env:DEMOQA_HOST = "https://demoqa.com"
+```
+
+## Запуск тестов
+
+```bash
+# все тесты
+poetry run pytest
+
+# только smoke
+poetry run pytest -m smoke
+
+# только API или только UI
+poetry run pytest -m api
+poetry run pytest -m ui
+
+# параллельно: N воркеров, тесты одного файла идут в одном воркере
 poetry run pytest -n 2 --dist=loadfile -m smoke
 ```
 
-### Allure отчет
+> `--dist=loadfile` нужен, потому что часть тестов в одном файле зависит от общего состояния. Подбирать число воркеров (`-n`) лучше по числу ядер: `-n auto`.
 
-Пример отчета по Selenium тестам
+### Маркеры
 
-![report_selenium.png](img/report_selenium.png)
+| Маркер       | Назначение                          |
+|--------------|-------------------------------------|
+| `smoke`      | быстрые критические проверки        |
+| `regression` | полная регрессия                    |
+| `api`        | API-тесты                           |
+| `ui`         | UI-тесты                            |
+| `e2e`        | сквозные сценарии                   |
+| `db`         | проверки напрямую в базе            |
+| `positive`   | позитивные сценарии                 |
+| `negative`   | негативные сценарии                 |
 
-Отчёт
+Маркеры можно комбинировать: `pytest -m "ui and smoke and not negative"`.
+
+## Allure-отчёт
+
+Результаты прогона пишутся в `output/allure-results`. Открыть отчёт:
 
 ```bash
 allure serve output/allure-results
 ```
 
-##  TODO
+Пример отчёта по Selenium-тестам:
 
-- ~~1. Параллельный запуск тестов~~
-- ~~2. Сбор Allure отчёта~~
-- ~~3. Проверить разные браузеры~~
-- ~~4. Разные разрешения у браузера параметр как у мобилки фул экран 2к 4к~~
-- 5. Как сохранять логи har из браузера когда сломался тест
-- 6. Понять как запускать разные версии браузеров (можно через докер вроде)
-- 7. Понять как настроить "Система выполнения тестов" в allure
-- 8. Разобраться с async
-- 9. Понять как делать диаграмму с запусками тестов в allure
-- 10. Дописать ui тесты book_store_application
-- 11. Дописать ui тесты [.py](src/ui/demoq/selenium/tests/widgets/test_9_select_menu.py)
-- ~~12. Написать тесты для playwright, 3 штуки~~
-- 13. Изучить флаки тесты в python
-- 14. Как понять сколько потоков выделять на параллельный запуск
+![Allure-отчёт Selenium](img/report_selenium.png)
+
+## Планы
+
+- [ ] Сохранять HAR-логи браузера при падении теста
+- [ ] Запуск разных версий браузеров (например, через Docker)
+- [ ] Настроить «Систему выполнения тестов» и диаграмму запусков в Allure
+- [ ] Дописать UI-тесты для `book_store_application`
+- [ ] Дописать UI-тесты для [`test_9_select_menu.py`](src/ui/demoq/selenium/tests/widgets/test_9_select_menu.py)
+- [ ] Изучить async и flaky-тесты
+- [ ] Определить оптимальное число потоков для параллельного запуска

@@ -32,7 +32,7 @@ class EndpointsDemoq(Enum):
     TABS = "/tabs"
     TOOL_TIPS = "/tool-tips"
     MENU = "/menu"
-    SELecT_MENU = "/select-menu"
+    SELECT_MENU = "/select-menu"
 
     # Interactions
     SORTABLE = "/sortable"

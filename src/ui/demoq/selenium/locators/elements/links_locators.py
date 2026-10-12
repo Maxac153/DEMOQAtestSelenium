@@ -2,15 +2,15 @@ from selenium.webdriver.common.by import By
 
 
 class LinksLocators:
-    SIMPLE_LINK_LINK = (By.XPATH, "//a[@id='simpleLink']")
-    DYNAMIC_LINK_LINK = (By.XPATH, "//a[@id='dynamicLink']")
+    SIMPLE_LINK_LINK = (By.CSS_SELECTOR, "a#simpleLink")
+    DYNAMIC_LINK_LINK = (By.CSS_SELECTOR, "a#dynamicLink")
 
-    CREATED_LINK = (By.XPATH, "//a[@id='created']")
-    NO_CONTENT_LINK = (By.XPATH, "//a[@id='no-content']")
-    MOVED_LINK = (By.XPATH, "//a[@id='moved']")
-    BAD_REQUEST_LINK = (By.XPATH, "//a[@id='bad-request']")
-    UNAUTHORIZED_LINK = (By.XPATH, "//a[@id='unauthorized']")
-    FORBIDDEN_LINK = (By.XPATH, "//a[@id='forbidden']")
-    INVALID_URL_LINK = (By.XPATH, "//a[@id='invalid-url']")
+    CREATED_LINK = (By.CSS_SELECTOR, "a#created")
+    NO_CONTENT_LINK = (By.CSS_SELECTOR, "a#no-content")
+    MOVED_LINK = (By.CSS_SELECTOR, "a#moved")
+    BAD_REQUEST_LINK = (By.CSS_SELECTOR, "a#bad-request")
+    UNAUTHORIZED_LINK = (By.CSS_SELECTOR, "a#unauthorized")
+    FORBIDDEN_LINK = (By.CSS_SELECTOR, "a#forbidden")
+    INVALID_URL_LINK = (By.CSS_SELECTOR, "a#invalid-url")
 
-    RESULT = (By.XPATH, "//p[@id='linkResponse']")
+    RESULT = (By.CSS_SELECTOR, "p#linkResponse")

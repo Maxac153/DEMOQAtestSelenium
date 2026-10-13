@@ -10,7 +10,7 @@ from src.ui.demoq.selenium.pages.widgets.progress_bar_page import ProgressBarPag
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.PROGRESS_BAR.value}"
 
 
-@allure.parent_suite("UI-тесты")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Progress Bar")
 class TestProgressBarPage:

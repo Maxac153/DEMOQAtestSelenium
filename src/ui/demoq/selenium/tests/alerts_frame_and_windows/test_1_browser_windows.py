@@ -10,7 +10,7 @@ from src.ui.demoq.selenium.pages.alerts_frame_windows.browser_windows_page impor
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.BROWSER_WINDOWS.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Browser Windows")
 class TestBrowserWindows:

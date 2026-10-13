@@ -11,7 +11,7 @@ from src.ui.demoq.selenium.pages.elements.links_page import LinksPage
 BASE_URL = f"{os.environ.get('DEMOQA_HOST')}{EndpointsDemoq.LINKS.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Links")
 class TestsLinks:

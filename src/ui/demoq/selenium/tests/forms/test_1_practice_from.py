@@ -10,7 +10,7 @@ from src.ui.demoq.selenium.pages.form.form_page import FormPage
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.AUTOMATION_PRACTICE_FORM.value}"
 
 
-@allure.parent_suite("UI-тесты")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Practice Form")
 class TestFormPage:

@@ -10,7 +10,7 @@ from src.ui.demoq.selenium.pages.widgets.menu_page import MenuPage
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.MENU.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Menu")
 class TestMenuPage:

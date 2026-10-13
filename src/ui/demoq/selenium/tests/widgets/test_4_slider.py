@@ -10,7 +10,7 @@ from src.ui.demoq.selenium.pages.widgets.slider_page import SliderPage
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.SLIDER.value}"
 
 
-@allure.parent_suite("UI-тесты")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Slider")
 class TestSliderPage:

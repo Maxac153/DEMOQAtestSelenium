@@ -11,7 +11,7 @@ BASE_URL = f"{os.environ.get('DEMOQA_HOST')}{EndpointsDemoq.CHECKBOX.value}"
 RUN_IDS = [f"Проверка выделения случайного чекбокса ({i})" for i in range(1)]
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-playwright-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Check Box")
 class TestsCheckBox:

@@ -2,7 +2,7 @@ import allure
 import pytest
 
 
-@allure.parent_suite("API-test")
+@allure.parent_suite("API-request-test")
 @allure.suite("Account API")
 @allure.feature("Аккаунт")
 class TestAccountApi:

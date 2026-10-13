@@ -10,7 +10,7 @@ from src.ui.demoq.selenium.pages.widgets.auto_complete_page import AutoCompleteP
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.AUTO_COMPLETE.value}"
 
 
-@allure.parent_suite("UI-тесты")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Auto Complete")
 class TestAutoCompletePage:

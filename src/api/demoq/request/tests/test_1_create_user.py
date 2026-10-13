@@ -4,7 +4,7 @@ import pytest
 from src.api.demoq.request.api.client import DemoQaClient
 
 
-@allure.parent_suite("API-test")
+@allure.parent_suite("API-request-test")
 @allure.suite("DemoQA")
 @allure.feature("Пользователь")
 class TestUserApi:

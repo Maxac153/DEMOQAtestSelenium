@@ -10,7 +10,7 @@ from src.ui.demoq.selenium.pages.widgets.tabs_page import TabsPage
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.TABS.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Tabs")
 class TestTabsPage:

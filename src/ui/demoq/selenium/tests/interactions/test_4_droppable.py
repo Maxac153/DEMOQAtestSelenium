@@ -10,7 +10,7 @@ from src.ui.demoq.selenium.pages.interactions.droppable_page import DroppablePag
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.DROPPABLE.value}"
 
 
-@allure.parent_suite("UI-тесты")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Droppable")
 class TestDroppablePage:

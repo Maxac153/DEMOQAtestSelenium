@@ -10,7 +10,7 @@ from src.ui.demoq.selenium.pages.elements.upload_and_download_page import Upload
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.UPLOAD_DOWNLOAD.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Upload And Download")
 class TestsUploadAndDownload:

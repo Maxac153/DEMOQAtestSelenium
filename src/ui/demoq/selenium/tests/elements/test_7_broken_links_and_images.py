@@ -11,7 +11,7 @@ from src.ui.demoq.selenium.pages.elements.broken_links_and_images_page import Br
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.BROKEN_LINKS.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Broken Links And Images")
 class TestsBrokenLinksAndImages:

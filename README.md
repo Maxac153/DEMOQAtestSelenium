@@ -16,9 +16,9 @@
 ```
 .
 ├── src/
-│   ├── api/demoq/          # API-клиент и API-тесты
+│   ├── api/demoq/          # API-клиент и API-request-test
 │   └── ui/demoq/
-│       └── selenium/       # страницы, локаторы и UI-тесты на Selenium
+│       └── selenium/       # страницы, локаторы и UI-selenium-test на Selenium
 ├── img/                    # картинки для README
 ├── conftest.py             # общие фикстуры
 ├── pytest.ini              # настройки pytest и маркеры
@@ -80,7 +80,10 @@ poetry run pytest -m api
 poetry run pytest -m ui
 
 # параллельно: N воркеров, тесты одного файла идут в одном воркере
-poetry run pytest -n 2 --dist=loadfile -m smoke
+poetry run pytest -n 5 --dist=loadfile
+
+# просмотр allure report
+allure serve output/allure-results
 ```
 
 > `--dist=loadfile` нужен, потому что часть тестов в одном файле зависит от общего состояния. Подбирать число воркеров (`-n`) лучше по числу ядер: `-n auto`.
@@ -91,8 +94,8 @@ poetry run pytest -n 2 --dist=loadfile -m smoke
 |--------------|-------------------------------------|
 | `smoke`      | быстрые критические проверки        |
 | `regression` | полная регрессия                    |
-| `api`        | API-тесты                           |
-| `ui`         | UI-тесты                            |
+| `api`        | API-request-test                           |
+| `ui`         | UI-selenium-test                            |
 | `e2e`        | сквозные сценарии                   |
 | `db`         | проверки напрямую в базе            |
 | `positive`   | позитивные сценарии                 |
@@ -110,14 +113,16 @@ allure serve output/allure-results
 
 Пример отчёта по Selenium-тестам:
 
-![Allure-отчёт Selenium](img/report_selenium.png)
+![allure_report.png](img/allure_report.png)
 
 ## Планы
 
 - [ ] Сохранять HAR-логи браузера при падении теста
 - [ ] Запуск разных версий браузеров (например, через Docker)
 - [ ] Настроить «Систему выполнения тестов» и диаграмму запусков в Allure
-- [ ] Дописать UI-тесты для `book_store_application`
-- [ ] Дописать UI-тесты для [`test_9_select_menu.py`](src/ui/demoq/selenium/tests/widgets/test_9_select_menu.py)
+- [ ] Дописать UI-selenium-test для `book_store_application`
+- [ ] Дописать UI-selenium-test для [`test_9_select_menu.py`](src/ui/demoq/selenium/tests/widgets/test_9_select_menu.py)
 - [ ] Изучить async и flaky-тесты
 - [ ] Определить оптимальное число потоков для параллельного запуска
+- [ ] Поправить сломанные тесты
+- [ ] Добавить версию браузера

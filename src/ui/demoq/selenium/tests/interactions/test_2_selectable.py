@@ -10,7 +10,7 @@ from src.ui.demoq.selenium.pages.interactions.selectable_page import SelectableP
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.SELECTABLE.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Selectable")
 class TestSelectablePage:

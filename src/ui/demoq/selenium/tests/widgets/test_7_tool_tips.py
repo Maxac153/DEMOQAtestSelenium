@@ -10,7 +10,7 @@ from src.ui.demoq.selenium.pages.widgets.tool_tips_page import ToolTipsPage
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.TOOL_TIPS.value}"
 
 
-@allure.parent_suite("UI-тесты")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Tool Tips")
 class TestToolTips:

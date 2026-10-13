@@ -11,7 +11,7 @@ from src.ui.demoq.selenium.pages.elements.button_page import ButtonPage
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.BUTTONS.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Button")
 class TestsButtons:

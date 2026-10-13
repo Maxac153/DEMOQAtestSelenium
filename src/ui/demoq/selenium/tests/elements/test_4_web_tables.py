@@ -31,7 +31,7 @@ def _create_person(fake: Faker) -> Person:
     )
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Web Tables")
 class TestsWebTable:

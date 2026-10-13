@@ -10,7 +10,7 @@ from src.ui.demoq.selenium.pages.elements.dynamic_properties_page import Dynamic
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.DYNAMIC_PROPERTIES.value}"
 
 
-@allure.parent_suite("UI-тесты")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Dynamic Properties")
 class TestDynamicProperties:

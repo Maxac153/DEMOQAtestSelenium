@@ -10,7 +10,7 @@ from src.ui.demoq.selenium.pages.alerts_frame_windows.frames_page import FramesP
 BASE_URL = f"{os.environ.get("DEMOQA_HOST")}{EndpointsDemoq.FRAMES.value}"
 
 
-@allure.parent_suite("UI-test")
+@allure.parent_suite("UI-selenium-test")
 @allure.suite("DemoQA")
 @allure.feature("Страница Frames")
 class TestFramesPage:

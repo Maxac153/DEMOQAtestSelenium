@@ -1,0 +1,80 @@
+import random
+from pathlib import Path
+
+from faker import Faker
+
+from src.ui.demoqa.__common.models.elements.person import Person
+from src.ui.demoqa.__common.models.elements.text_box import TextBox
+from src.ui.demoqa.__common.models.widgets.color import Color
+from src.ui.demoqa.__common.models.widgets.date import Date
+
+faker_ru = Faker("ru_RU")
+fake_en = Faker("En")
+Faker.seed()
+
+
+def generated_person():
+    yield Person(
+        full_name=faker_ru.first_name() + " " + faker_ru.last_name() + " " + faker_ru.middle_name(),
+        firstname=faker_ru.first_name(),
+        lastname=faker_ru.last_name(),
+        age=random.randint(10, 80),
+        salary=random.randint(10000, 100000),
+        department=faker_ru.job(),
+        email=faker_ru.email(),
+        current_address=faker_ru.address(),
+        permanent_address=faker_ru.address(),
+        mobile=faker_ru.msisdn(),
+    )
+
+
+def generated_file(file_path: str):
+    full_path = Path(file_path).resolve()
+    full_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(full_path, "w") as file:
+        file.write(f"Hello World{random.randint(0, 999)}")
+
+    return file.name, str(full_path)
+
+
+def generated_color():
+    yield Color(
+        color_name=[
+            "Red",
+            "Blue",
+            "Green",
+            "Yellow",
+            "Purple",
+            "Black",
+            "White",
+            "Voilet",
+            "Indigo",
+            "Magenta",
+            "Aqua"
+        ]
+    )
+
+
+def generated_date():
+    yield Date(
+        year=fake_en.year(),
+        month=fake_en.month_name(),
+        day=fake_en.day_of_month(),
+        time="12:00"
+    )
+
+
+def create_text_box(fake: Faker, omit: tuple[str, ...] = (), **overrides: str) -> TextBox:
+    """Создаёт данные формы Text Box. Поля из omit не заполняются."""
+    fields = {
+        "full_name": fake.name(),
+        "email": fake.email(),
+        "current_address": fake.address().replace("\n", ", "),
+        "permanent_address": fake.address().replace("\n", ", "),
+    }
+    fields.update(overrides)
+    for field in omit:
+        fields.pop(field)
+
+    return TextBox(**fields)

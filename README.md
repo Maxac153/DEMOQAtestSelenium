@@ -16,8 +16,8 @@
 ```
 .
 ├── src/
-│   ├── api/demoq/          # API-клиент и API-request-test
-│   └── ui/demoq/
+│   ├── api/demoqa/          # API-клиент и API-request-test
+│   └── ui/demoqa/
 │       └── selenium/       # страницы, локаторы и UI-selenium-test на Selenium
 ├── img/                    # картинки для README
 ├── conftest.py             # общие фикстуры
@@ -121,6 +121,6 @@ allure serve output/allure-results
 - [ ] Запуск разных версий браузеров (например, через Docker)
 - [ ] Настроить «Систему выполнения тестов» и диаграмму запусков в Allure
 - [ ] Дописать UI-selenium-test для `book_store_application`
-- [ ] Дописать UI-selenium-test для [`test_9_select_menu.py`](src/ui/demoq/selenium/tests/widgets/test_9_select_menu.py)
+- [ ] Дописать UI-selenium-test для [`test_9_select_menu.py`](src/ui/demoqa/selenium/tests/widgets/test_9_select_menu.py)
 - [ ] Изучить async и flaky-тесты
 - [ ] Определить оптимальное число потоков для параллельного запуска

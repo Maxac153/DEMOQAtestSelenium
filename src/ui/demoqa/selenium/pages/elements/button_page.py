@@ -1,0 +1,27 @@
+import allure
+from selenium.webdriver import ActionChains
+
+from src.ui.demoqa.__common.models.elements.button import Button
+from src.ui.demoqa.selenium.locators.elements.button_locators import ButtonLocators
+from src.ui.demoqa.selenium.pages.__common.base_page import BasePage
+
+
+class ButtonPage(BasePage):
+    @allure.step("Нажатие на Button")
+    def button_click(self, button_enum: Button) -> str:
+        result = ""
+        if button_enum == Button.DOUBLE_CLICK_ME_BUTTON:
+            element = self.element_is_visible(ButtonLocators.DOUBLE_CLICK_ME_BUTTON)
+            ActionChains(self.driver).move_to_element(element).double_click(element).perform()
+            result = self.element_is_visible(ButtonLocators.DOUBLE_CLICK_ME_RESULT).text
+
+        if button_enum == Button.RIGHT_CLICK_ME_BUTTON:
+            element = self.element_is_visible(ButtonLocators.RIGHT_CLICK_ME_BUTTON)
+            ActionChains(self.driver).move_to_element(element).context_click(element).perform()
+            result = self.element_is_visible(ButtonLocators.RIGHT_CLICK_ME_RESULT).text
+
+        if button_enum == Button.CLICK_ME_BUTTON:
+            self.element_is_visible(ButtonLocators.CLICK_ME_BUTTON).click()
+            result = self.element_is_visible(ButtonLocators.CLICK_ME_RESULT).text
+
+        return result

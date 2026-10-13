@@ -124,5 +124,3 @@ allure serve output/allure-results
 - [ ] Дописать UI-selenium-test для [`test_9_select_menu.py`](src/ui/demoq/selenium/tests/widgets/test_9_select_menu.py)
 - [ ] Изучить async и flaky-тесты
 - [ ] Определить оптимальное число потоков для параллельного запуска
-- [ ] Поправить сломанные тесты
-- [ ] Добавить версию браузера
